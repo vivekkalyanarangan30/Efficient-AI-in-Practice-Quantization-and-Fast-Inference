@@ -1,0 +1,114 @@
+
+======================================================================
+  KV CACHE QUANTIZATION CLAIMS VERIFICATION
+======================================================================
+Model: TinyLlama/TinyLlama-1.1B-Chat-v1.0
+Loading TinyLlama/TinyLlama-1.1B-Chat-v1.0...
+`torch_dtype` is deprecated! Use `dtype` instead!
+2025-12-28 12:58:25.580965: I external/local_xla/xla/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
+2025-12-28 12:58:25.593135: I external/local_xla/xla/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
+2025-12-28 12:58:25.619829: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1766926705.659220    6506 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1766926705.671184    6506 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1766926705.714095    6506 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1766926705.714170    6506 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1766926705.714180    6506 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1766926705.714188    6506 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2025-12-28 12:58:25.728805: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING:torchao.kernel.intmm:Warning: Detected no triton, on systems without Triton certain kernels will not work
+  Model: TinyLlama/TinyLlama-1.1B-Chat-v1.0
+  Device: cpu
+  Layers: 22, Heads: 32, KV Heads: 4
+  Hidden: 2048, Head dim: 64, RoPE: True
+  Parameters: 1,100,048,384
+
+======================================================================
+  EXTRACTING KV CACHE
+======================================================================
+Seq length: 60, Keys: torch.Size([1, 4, 60, 64])
+Pre-RoPE captured: True
+
+======================================================================
+  CLAIM 1: Key channel-wise outliers, Value token-wise variation
+======================================================================
+Layer 0: Keys consistency=0.821, outliers=1, ratio=3.6x
+         Values outlier_tokens=6, ratio=3.3x
+Layer 11: Keys consistency=0.777, outliers=2, ratio=3.1x
+         Values outlier_tokens=0, ratio=1.6x
+Layer 21: Keys consistency=0.790, outliers=2, ratio=3.4x
+         Values outlier_tokens=0, ratio=1.7x
+
+  VERDICT: ✓ (avg key consistency: 0.796)
+
+======================================================================
+  CLAIM 2: Per-channel for Keys, Per-token for Values
+======================================================================
+
+--- INT8 ---
+Layer 0: K=per_channel(1.3x), V=per_token(1.0x)
+Layer 11: K=per_channel(2.9x), V=per_token(1.4x)
+Layer 21: K=per_channel(3.7x), V=per_token(1.4x)
+
+--- INT4 ---
+Layer 0: K=per_channel(1.2x), V=per_channel(1.1x)
+Layer 11: K=per_channel(3.1x), V=per_token(1.3x)
+Layer 21: K=per_channel(3.8x), V=per_token(1.4x)
+
+  Keys: 6/6, Values: 5/6
+  VERDICT: Keys ✓, Values ✓
+
+======================================================================
+  CLAIM 3: RoPE dilutes outlier structure
+======================================================================
+Layer 0: 3.99x -> 3.63x (dilution: 1.10x, overlap: 5/5)
+Layer 11: 3.20x -> 3.05x (dilution: 1.05x, overlap: 5/5)
+Layer 21: 3.59x -> 3.43x (dilution: 1.05x, overlap: 5/5)
+
+  VERDICT: ✓ (avg dilution: 1.07x)
+
+======================================================================
+  CLAIM 4: INT4 preserves generation quality
+======================================================================
+Prompt: 'The key insight about transformers is that'
+
+[FP32]  The key insight about transformers is that they can be used to store energy. This is because they can convert electrical energy into mechanical energy, which can then be used to power other devices
+[INT4]  The key insight about transformers is that they can be used to store energy. This is because they can convert electrical energy into mechanical energy, which can then be used to power other devices
+[INT4w] The key insight about transformers is that they can be used to store energy. This is because they can convert electrical energy into mechanical energy, which can then be used to power other devices
+[INT2]  The key insight about transformers is that they can be used to store energy. This is because they can convert electrical energy into mechanical energy, which can then be used to power other devices
+
+  Token match INT4 vs FP32: 100.0%
+  VERDICT: ✓
+
+======================================================================
+  CLAIM 5: Attention sinks
+======================================================================
+Attention to each position (Layer 0, last query):
+  [ 0] 0.0142 ███████████████████████████ <-SINK
+  [ 1] 0.0143 ███████████████████████████ <-SINK
+  [ 2] 0.0140 ██████████████████████████ <-SINK
+  [ 3] 0.0134 █████████████████████████ <-SINK
+  [ 4] 0.0135 █████████████████████████
+  [ 5] 0.0140 ██████████████████████████
+  [ 6] 0.0134 █████████████████████████
+  [ 7] 0.0142 ███████████████████████████
+  [ 8] 0.0149 ████████████████████████████
+  [ 9] 0.0140 ██████████████████████████
+  [10] 0.0132 █████████████████████████
+  [11] 0.0140 ██████████████████████████
+
+  Avg sink ratio: 15.30x
+  VERDICT: ✓
+
+======================================================================
+  SUMMARY
+======================================================================
+  1. Key/Value asymmetry              ✓
+  2a. Keys: per-channel wins          ✓
+  2b. Values: per-token wins          ✓
+  3. RoPE dilution                    ✓
+  4. INT4 quality                     ✓
+  5. Attention sinks                  ✓
+
+  6/6 claims confirmed on TinyLlama/TinyLlama-1.1B-Chat-v1.0

@@ -1,0 +1,60 @@
+Loading model: TinyLlama/TinyLlama-1.1B-Chat-v1.0
+`torch_dtype` is deprecated! Use `dtype` instead!
+2025-12-28 16:29:34.943962: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1766939374.964171     722 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1766939374.970329     722 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1766939374.984981     722 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1766939374.985006     722 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1766939374.985009     722 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1766939374.985013     722 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2025-12-28 16:29:34.989728: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Extracted layer 11 q_proj: shape=torch.Size([2048, 2048])
+
+============================================================
+INT4 Group Quantization Analysis
+Weight shape: torch.Size([2048, 2048])
+============================================================
+
+Group Size Analysis:
+---------------------------------------------------------------------------
+  Group Size          MSE    Max Error   Overhead  Compression
+---------------------------------------------------------------------------
+          32     6.65e-06       0.0269      11.1%        3.56x
+          64     8.43e-06       0.0275       5.9%        3.76x
+         128     1.04e-05       0.0275       3.0%        3.88x
+         256     1.26e-05       0.0280       1.5%        3.94x
+         512     1.51e-05       0.0280       0.8%        3.97x
+        1024     1.79e-05       0.0280       0.4%        3.98x
+        2048     2.12e-05       0.0280       0.2%        3.99x
+        2048     2.12e-05       0.0280       0.2%        3.99x
+
+
+Group vs Block Comparison:
+-----------------------------------------------------------------
+Scheme          Config                   MSE       Scales Compression
+-----------------------------------------------------------------
+Group (1D)      g=32                6.65e-06      131,072      3.56x
+Group (1D)      g=64                8.43e-06       65,536      3.76x
+Group (1D)      g=128               1.04e-05       32,768      3.88x
+Block (2D)      (128, 128)          5.23e-05          256      4.00x
+Block (2D)      (64, 64)            3.23e-05        1,024      4.00x
+Block (2D)      (32, 32)            2.31e-05        4,096      3.98x
+
+
+Generating figures...
+Saved: figures/granularity_tradeoff.png
+Saved: figures/memory_layout.png
+Saved: figures/int4_packing.png
+
+
+INT4 Packing Verification:
+Original:  [-8, 7, -3, 4, 0, -1, 2, 5]
+Packed:    ['0x0F', '0x5C', '0x87', '0xAD']
+Unpacked:  [-8, 7, -3, 4, 0, -1, 2, 5]
+Roundtrip: PASS
+
+============================================================
+Analysis complete. Figures saved to figures/
+============================================================
