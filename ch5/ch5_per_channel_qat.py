@@ -318,40 +318,54 @@ def gradient_analysis(save_plots=False):
 
     if save_plots:
         plt = setup_manning_style()
-        fig, axes = plt.subplots(1, 3, figsize=(5.6, 2.2))
+        fig, axes = plt.subplots(1, 3, figsize=(5.6, 3.0))
+        fig.subplots_adjust(wspace=0.45, bottom=0.22)
+
+        channels = np.arange(64)
 
         # Panel 1: Clipped gradient fraction per channel
-        channels = np.arange(64)
-        axes[0].bar(channels, zero_frac_pt.numpy(), alpha=0.7, width=0.8,
-                    color=MANNING_COLORS['blue'], label='Per-tensor')
-        axes[0].bar(channels, zero_frac_pc.numpy(), alpha=0.7, width=0.4,
-                    color=MANNING_COLORS['orange'], label='Per-channel')
+        h1 = axes[0].bar(channels, zero_frac_pt.numpy(), alpha=0.7, width=0.8,
+                         color=MANNING_COLORS['blue'])
+        h2 = axes[0].bar(channels, zero_frac_pc.numpy(), alpha=0.7, width=0.4,
+                         color=MANNING_COLORS['orange'])
         axes[0].set_xlabel('Output channel')
-        axes[0].set_ylabel('Fraction gradients clipped')
-        axes[0].set_title('STE gradient clipping (INT4)')
-        axes[0].legend(loc='upper right')
+        axes[0].set_ylabel('Frac. gradients clipped')
+        axes[0].set_title('STE clipping (INT4)', fontsize=9, pad=4)
+        axes[0].set_xlim(-1, 64)
 
-        # Panel 2: Per-channel scales
+        # Panel 2: Per-channel scales — annotate dashed line directly
         axes[1].bar(channels, scales_pc.numpy(), color=MANNING_COLORS['green'],
                     alpha=0.8, width=0.8)
-        axes[1].axhline(y=scale_pt.item(), color=MANNING_COLORS['red'],
-                        linestyle='--', linewidth=1.5, label=f'Per-tensor scale')
+        pt_y = scale_pt.item()
+        axes[1].axhline(y=pt_y, color=MANNING_COLORS['red'],
+                        linestyle='--', linewidth=1.5)
+        axes[1].annotate('Per-tensor scale', xy=(32, pt_y),
+                         fontsize=7, color=MANNING_COLORS['red'],
+                         ha='center', va='center',
+                         bbox=dict(boxstyle='round,pad=0.15',
+                                   fc='white', ec='none', alpha=0.85))
         axes[1].set_xlabel('Output channel')
         axes[1].set_ylabel('Scale value')
-        axes[1].set_title('Per-channel vs per-tensor scales')
-        axes[1].legend(loc='upper right')
+        axes[1].set_title('Per-channel scales vs\nper-tensor scale', fontsize=9, pad=4)
+        axes[1].set_xlim(-1, 64)
 
         # Panel 3: Gradient magnitude per channel
-        axes[2].scatter(channels, grad_mag_pt.numpy(), s=12, alpha=0.7,
-                       color=MANNING_COLORS['blue'], label='Per-tensor', zorder=3)
-        axes[2].scatter(channels, grad_mag_pc.numpy(), s=12, alpha=0.7,
-                       color=MANNING_COLORS['orange'], label='Per-channel', zorder=3)
+        axes[2].scatter(channels, grad_mag_pt.numpy(), s=14, alpha=0.7,
+                       color=MANNING_COLORS['blue'],
+                       zorder=3, edgecolors='none')
+        axes[2].scatter(channels, grad_mag_pc.numpy(), s=14, alpha=0.7,
+                       color=MANNING_COLORS['orange'],
+                       zorder=3, edgecolors='none')
         axes[2].set_xlabel('Output channel')
         axes[2].set_ylabel('Mean |gradient|')
-        axes[2].set_title('Gradient magnitude by channel')
-        axes[2].legend(loc='upper right')
+        axes[2].set_title('Gradient magnitude', fontsize=9, pad=4)
+        axes[2].set_xlim(-1, 64)
 
-        plt.tight_layout()
+        # Shared legend below all panels
+        fig.legend([h1, h2], ['Per-tensor', 'Per-channel'],
+                   loc='lower center', ncol=2, fontsize=8,
+                   frameon=False, bbox_to_anchor=(0.5, 0.02))
+
         plt.savefig('fig_5_12_gradient_analysis.png', dpi=300, bbox_inches='tight')
         plt.savefig('fig_5_12_gradient_analysis.pdf', bbox_inches='tight')
         print("\n→ Saved fig_5_12_gradient_analysis.png/pdf")
