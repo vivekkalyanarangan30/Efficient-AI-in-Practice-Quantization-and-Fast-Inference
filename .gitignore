@@ -210,3 +210,6 @@ __marimo__/
 .vscode
 
 data
+ch6_onnx_artifacts
+*.data
+*.onnx
