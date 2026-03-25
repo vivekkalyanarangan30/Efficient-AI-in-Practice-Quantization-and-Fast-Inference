@@ -213,3 +213,4 @@ data
 ch6_onnx_artifacts
 *.data
 *.onnx
+output*
