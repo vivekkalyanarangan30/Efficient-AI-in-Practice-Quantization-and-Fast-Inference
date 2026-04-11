@@ -963,9 +963,11 @@ def run_operator_coverage():
 def plot_equivalence(vision_results, nlp_results, save_plots=False):
     """Figure 6.6: Cross-framework numerical equivalence.
 
-    Two-panel figure:
-      Left — ResNet-18 max-abs-diff (log scale) with cosine sim annotated
-      Right — BERT-base max-abs-diff (log scale) with cosine sim annotated
+    Two-panel figure (stacked vertically so annotations have the full
+    figure width to breathe in — side-by-side panels are too narrow for
+    the per-bar cos/agr labels and cause overlap with adjacent labels):
+      Top    — ResNet-18 max-abs-diff (log scale) with cosine sim annotated
+      Bottom — BERT-base max-abs-diff (log scale) with cosine sim annotated
     Top-1 agreement annotated on each bar.
     """
     if not HAS_MPL:
@@ -974,7 +976,7 @@ def plot_equivalence(vision_results, nlp_results, save_plots=False):
 
     apply_manning_style()
 
-    fig, axes = plt.subplots(1, 2, figsize=(FIG_MAX_WIDTH, 2.8))
+    fig, axes = plt.subplots(2, 1, figsize=(FIG_MAX_WIDTH, 4.4))
 
     color_list = [
         COLORS["blue_l2"], COLORS["orange_l2"], COLORS["green_l3"],
@@ -1030,9 +1032,9 @@ def plot_equivalence(vision_results, nlp_results, save_plots=False):
 
     fig.suptitle(
         "Cross-framework numerical equivalence",
-        fontsize=10, fontweight="bold", y=1.02,
+        fontsize=10, fontweight="bold", y=1.0,
     )
-    plt.tight_layout()
+    plt.tight_layout(rect=(0, 0, 1, 0.97), h_pad=1.6)
 
     if save_plots:
         save_figure(fig, "CH06_F06_Kalyanarangan")
