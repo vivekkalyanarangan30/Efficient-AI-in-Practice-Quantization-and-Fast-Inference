@@ -1254,7 +1254,7 @@ def run_memory(config: Config):
     #                       LoRA = (h+i)×r per target, 3 targets
     lora_per_layer = 4 * (2 * h * r) + 3 * ((h + i) * r)
     lora_params = n_layers * lora_per_layer
-    lora_bytes = lora_params * 2  # BF16
+    lora_bytes = lora_params * 2  # FP32 master weights (BF16 compute via autocast)
 
     # Optimizer: paged_adamw_8bit uses ~1 byte per optimizer param
     optim_bytes = lora_params * 1  # 8-bit Adam ≈ 1 byte/param
