@@ -605,6 +605,7 @@ def plot_reconstruction_mse(results, cfg):
         ax.set_xticklabels(names)
         ax.set_ylabel("Mean Squared Error")
         ax.set_title(f"{title} Reconstruction MSE")
+        ax.set_ylim(0, max(vals) * 1.25)
         for i, v in enumerate(vals):
             ax.text(i, v * 1.05, f"{v:.4f}", ha="center",
                     va="bottom", fontsize=9)
