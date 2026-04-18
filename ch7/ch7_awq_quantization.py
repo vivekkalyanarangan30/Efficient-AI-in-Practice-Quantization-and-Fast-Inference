@@ -1577,14 +1577,14 @@ def run_awq_deployment(cfg: Config):
 
 def plot_awq_algorithm_flow(cfg: Config):
     """Figure 7.17: AWQ algorithm schematic — per-channel scaling with grid search."""
-    fig, ax = plt.subplots(figsize=(14, 5.5))
-    ax.set_xlim(0, 14)
-    ax.set_ylim(0, 5.5)
+    fig, ax = plt.subplots(figsize=(13.5, 12))
+    ax.set_xlim(0, 13.5)
+    ax.set_ylim(0, 12)
     ax.axis("off")
     ax.set_title("AWQ Algorithm: Activation-Aware Per-Channel Scaling",
-                 fontsize=12, pad=20)
+                 fontsize=26, pad=24, fontweight="bold")
 
-    def box(x, y, w, h, text, fc, ec="black", ls="-", lw=1.2, fs=9):
+    def box(x, y, w, h, text, fc, ec="black", ls="-", lw=2.2, fs=22):
         rect = mpatches.FancyBboxPatch(
             (x, y), w, h, boxstyle="round,pad=0.1",
             facecolor=fc, edgecolor=ec, linewidth=lw, linestyle=ls,
@@ -1595,58 +1595,64 @@ def plot_awq_algorithm_flow(cfg: Config):
 
     def arrow(x1, y1, x2, y2, text="", color="black"):
         ax.annotate("", xy=(x2, y2), xytext=(x1, y1),
-                    arrowprops=dict(arrowstyle="->", color=color, lw=1.5))
+                    arrowprops=dict(arrowstyle="->", color=color, lw=2.8))
         if text:
             mx, my = (x1 + x2) / 2, (y1 + y2) / 2
-            ax.text(mx, my + 0.2, text, fontsize=8, ha="center",
-                    color=color, style="italic")
+            if abs(y2 - y1) > abs(x2 - x1):
+                # vertical arrow → label to the right
+                ax.text(mx + 0.55, my, text, fontsize=20, ha="left", va="center",
+                        color=color, style="italic", fontweight="bold")
+            else:
+                # horizontal arrow → label above
+                ax.text(mx, my + 0.4, text, fontsize=20, ha="center",
+                        color=color, style="italic", fontweight="bold")
 
-    # Calibration data → activation scales
-    box(0.2, 4.2, 1.6, 0.8, "X (calib)\n128 samples", "#dde8d6", fs=8)
-    arrow(1.8, 4.6, 2.8, 4.6)
-    box(2.8, 4.2, 2.0, 0.8, "Act Scales\nmean(|X|)\nper channel", "#ccdcec", fs=8)
+    # ─── Row 1 (top): inputs ───
+    box(1.5, 9.5, 2.5, 1.2, "X (calib)\n128 samples", "#dde8d6", fs=20)
+    arrow(4.0, 10.1, 4.7, 10.1)
+    box(4.7, 9.5, 2.8, 1.2, "Act Scales\nmean(|X|)\nper channel", "#ccdcec", fs=20)
 
-    # Weight matrix W
-    box(0.2, 1.5, 1.6, 2.2, "W\n[out, in]\nFP16 weights", "#e8e8e8", fs=9)
+    # ─── Row 2 (middle): W + Grid Search container ───
+    box(0.3, 5.0, 2.6, 3.7, "W\n[out, in]\nFP16 weights", "#e8e8e8", fs=22)
 
-    # Grid search block
-    box(2.8, 1.5, 3.5, 2.2, "", "#f5f5f5", ls="--", lw=1.0)
-    ax.text(4.55, 3.5, "Grid search over α", fontsize=9,
-            ha="center", style="italic", color="#333333")
+    # Grid container (dashed)
+    box(3.5, 5.0, 5.7, 3.7, "", "#f5f5f5", ls="--", lw=2.0)
+    ax.text(6.35, 8.4, "Grid search over α", fontsize=22,
+            ha="center", style="italic", color="#333333", fontweight="bold")
 
-    # Inside grid search
-    box(3.0, 2.6, 1.4, 0.8, "s = act^α\nper channel", "#b3cde3", fs=8)
-    arrow(4.4, 3.0, 5.0, 3.0, "scale")
-    box(5.0, 2.6, 1.1, 0.8, "W' = W·s\nX' = X/s", "#d9e6f2", fs=8)
+    # Inside grid
+    box(3.7, 6.5, 2.0, 1.4, "s = act^α\nper channel", "#b3cde3", fs=20)
+    arrow(5.7, 7.2, 7.0, 7.2, "scale")
+    box(7.0, 6.5, 2.0, 1.4, "W' = W·s\nX' = X/s", "#d9e6f2", fs=20)
+    box(3.7, 5.1, 5.3, 1.2, "min MSE:\n||Q(W·s)·X/s − W·X||",
+        "#fff2cc", ec="#333333", fs=20)
 
-    # Evaluate
-    box(3.0, 1.7, 3.1, 0.6, "min MSE: ||Q(W·s)·X/s − W·X||",
-        "#fff2cc", ec="#333333", fs=8)
+    # Arrows into grid container
+    arrow(6.1, 9.5, 6.1, 8.7)       # Act Scales → grid (vertical)
+    arrow(2.9, 6.85, 3.5, 6.85)     # W → grid (horizontal)
 
-    # Arrows from act_scales and W into grid search
-    arrow(3.8, 4.2, 3.8, 3.5)
-    arrow(1.8, 2.6, 2.8, 2.6)
+    # ─── Row 3 (bottom): Apply → Fold → INT4 ───
+    arrow(5.0, 5.0, 5.0, 4.2, "best s*")  # grid → Apply (vertical)
 
-    # Best scales → apply
-    arrow(6.3, 2.6, 7.2, 2.6, "best s*")
+    box(3.7, 1.6, 2.6, 2.6,
+        "W* = W·s*\n\nQuantize:\nQ(W*)\nstandard\ngroup-wise",
+        "#d6eaf8", fs=20)
 
-    # Apply scaling
-    box(7.2, 1.5, 2.0, 2.2, "W* = W·s*\n\nQuantize:\nQ(W*)\nstandard\ngroup-wise", "#d6eaf8", fs=8)
+    arrow(6.3, 2.9, 8.1, 2.9, "absorb s*")
+    box(8.1, 1.7, 2.4, 2.4,
+        "Fold s* into\npreceding\nLayerNorm\nγ → γ/s*",
+        "#e8e8e8", fs=20)
 
-    # Absorb
-    arrow(9.2, 2.6, 10.2, 2.6, "absorb s*")
-    box(10.2, 1.8, 1.8, 1.5, "Fold s* into\npreceding\nLayerNorm\nγ → γ/s*", "#e8e8e8", fs=8)
+    arrow(10.5, 2.9, 11.5, 2.9)
+    box(11.5, 2.2, 1.6, 1.4, "INT4\nmodel\nready", "#d6eaf8", fs=20)
 
-    # Final
-    arrow(12.0, 2.55, 12.8, 2.55)
-    box(12.8, 2.0, 1.0, 1.1, "INT4\nmodel\nready", "#d6eaf8", fs=9)
-
-    # Key insight
-    ax.text(7.0, 0.5,
+    # ─── Footer ───
+    ax.text(6.75, 0.6,
             "Key: scale salient channels UP before quantization → they get more grid points.\n"
             "Inverse scaling absorbed into preceding LayerNorm → zero runtime overhead.",
-            fontsize=8, ha="center", color="#1B5299", style="italic",
-            bbox=dict(boxstyle="round", facecolor="white", alpha=0.9, edgecolor="#1B5299"))
+            fontsize=18, ha="center", color="#1B5299", style="italic", fontweight="bold",
+            bbox=dict(boxstyle="round,pad=0.6", facecolor="white", alpha=0.95,
+                      edgecolor="#1B5299", linewidth=1.8))
 
     save_or_show(fig, "fig7_17_awq_algorithm_flow", cfg)
 
