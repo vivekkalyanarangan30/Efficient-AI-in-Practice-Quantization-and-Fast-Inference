@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="610" viewBox="0 0 940 610">
+<style>
+  text { font-family: Arial, Helvetica, sans-serif; fill: #28253d; }
+  .title { font-size: 12px; font-weight: bold; }
+  .subtitle { font-size: 10.5px; }
+  .label { font-size: 10.5px; }
+  .heading { font-size: 16px; font-weight: bold; }
+  .decision { fill: #fff2c6; stroke: #28253d; stroke-width: 0.9; stroke-linejoin: miter; }
+  .outcome { fill: #d6edc8; stroke: #28253d; stroke-width: 1.2; stroke-linejoin: miter; }
+  .root { fill: #dce6f5; stroke: #28253d; stroke-width: 1.1; stroke-linejoin: miter; }
+  .special { fill: #e8e0f4; stroke: #28253d; stroke-width: 0.9; stroke-linejoin: miter; }
+  .arrow { fill: none; stroke: #28253d; stroke-width: 1.0; stroke-linecap: round; }
+  .trunk { fill: none; stroke: #28253d; stroke-width: 1.0; stroke-linecap: round; }
+</style>
+<defs>
+  <marker id="ah" viewBox="0 0 10 8" refX="10" refY="4" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+    <path d="M0,0 L10,4 L0,8 Z" fill="#28253d"/>
+  </marker>
+</defs>
+
+<!-- Heading -->
+<text class="heading" x="470" y="25" text-anchor="middle">Serving backend decision tree</text>
+
+<!-- Root: Target hardware -->
+<rect class="root" x="329" y="40" width="140" height="36" rx="18"/>
+<text class="title" x="399" y="58" text-anchor="middle" dominant-baseline="central">Target hardware</text>
+
+<!-- Root -> Q1 -->
+<line class="arrow" x1="399" y1="76" x2="399" y2="93" marker-end="url(#ah)"/>
+
+<!-- Q1: NVIDIA GPU? -->
+<rect class="decision" x="319" y="95" width="160" height="40" rx="7"/>
+<text class="title" x="399" y="117" text-anchor="middle" dominant-baseline="central">NVIDIA GPU?</text>
+
+<!-- Q1 -> Q2 Yes -->
+<path class="arrow" d="M335,135 Q250,160 185,178" marker-end="url(#ah)"/>
+<text class="label" x="260" y="151" text-anchor="middle">Yes</text>
+
+<!-- Q1 -> Q3 No -->
+<path class="arrow" d="M463,135 Q540,160 610,178" marker-end="url(#ah)"/>
+<text class="label" x="540" y="151" text-anchor="middle">No</text>
+
+<!-- Q2: Single GPU SKU at scale? -->
+<rect class="decision" x="100" y="180" width="170" height="50" rx="7"/>
+<text class="title" x="185" y="199" text-anchor="middle" dominant-baseline="central">Single GPU SKU</text>
+<text class="title" x="185" y="215" text-anchor="middle" dominant-baseline="central">at scale?</text>
+
+<!-- Q3: Intel CPU / iGPU / NPU? -->
+<rect class="decision" x="513" y="180" width="200" height="50" rx="7"/>
+<text class="title" x="613" y="199" text-anchor="middle" dominant-baseline="central">Intel CPU / iGPU /</text>
+<text class="title" x="613" y="215" text-anchor="middle" dominant-baseline="central">NPU?</text>
+
+<!-- Q2 -> TRT Peak latency -->
+<path class="arrow" d="M140,230 Q115,250 102,263" marker-end="url(#ah)"/>
+<text class="label" x="55" y="253" text-anchor="middle">Peak latency</text>
+
+<!-- Q2 -> ORT+TRT Unified serving -->
+<path class="arrow" d="M232,230 Q254,250 268,263" marker-end="url(#ah)"/>
+<text class="label" x="322" y="253" text-anchor="middle">Unified serving</text>
+
+<!-- Q3 -> Q4 Yes -->
+<path class="arrow" d="M560,230 Q540,250 527,268" marker-end="url(#ah)"/>
+<text class="label" x="509" y="253" text-anchor="middle">Yes</text>
+
+<!-- Q3 -> Q5 No -->
+<path class="arrow" d="M670,230 Q694,250 700,268" marker-end="url(#ah)"/>
+<text class="label" x="716" y="253" text-anchor="middle">No</text>
+
+<!-- OUTCOME: TensorRT standalone -->
+<rect class="outcome" x="25" y="265" width="155" height="62" rx="7"/>
+<text class="title" x="102" y="282" text-anchor="middle" dominant-baseline="central">TensorRT standalone</text>
+<text class="subtitle" x="102" y="299" text-anchor="middle" dominant-baseline="central">engine .plan</text>
+<text class="subtitle" x="102" y="315" text-anchor="middle" dominant-baseline="central">peak GPU latency</text>
+
+<!-- OUTCOME: ORT + TensorRT EP -->
+<rect class="outcome" x="195" y="265" width="150" height="62" rx="7"/>
+<text class="title" x="270" y="282" text-anchor="middle" dominant-baseline="central">ORT + TensorRT EP</text>
+<text class="subtitle" x="270" y="299" text-anchor="middle" dominant-baseline="central">ONNX + engine cache</text>
+<text class="subtitle" x="270" y="315" text-anchor="middle" dominant-baseline="central">unified serving</text>
+
+<!-- Q4: Unified ORT surface? -->
+<rect class="decision" x="452" y="270" width="150" height="50" rx="7"/>
+<text class="title" x="527" y="289" text-anchor="middle" dominant-baseline="central">Unified ORT</text>
+<text class="title" x="527" y="305" text-anchor="middle" dominant-baseline="central">surface?</text>
+
+<!-- Q5: Other target -->
+<rect class="decision" x="640" y="270" width="120" height="50" rx="7"/>
+<text class="title" x="700" y="295" text-anchor="middle" dominant-baseline="central">Other target</text>
+
+<!-- Q4 -> OpenVINO Peak latency -->
+<path class="arrow" d="M488,320 Q462,350 448,368" marker-end="url(#ah)"/>
+<text class="label" x="400" y="350" text-anchor="middle">Peak latency</text>
+
+<!-- Q4 -> ORT+OpenVINO Yes -->
+<path class="arrow" d="M573,320 Q595,350 605,368" marker-end="url(#ah)"/>
+<text class="label" x="630" y="350" text-anchor="middle">Yes</text>
+
+<!-- OUTCOME: OpenVINO standalone -->
+<rect class="outcome" x="375" y="370" width="150" height="62" rx="7"/>
+<text class="title" x="450" y="387" text-anchor="middle" dominant-baseline="central">OpenVINO standalone</text>
+<text class="subtitle" x="450" y="404" text-anchor="middle" dominant-baseline="central">IR .xml + .bin</text>
+<text class="subtitle" x="450" y="420" text-anchor="middle" dominant-baseline="central">peak Intel latency</text>
+
+<!-- OUTCOME: ORT + OpenVINO EP -->
+<rect class="outcome" x="535" y="370" width="150" height="62" rx="7"/>
+<text class="title" x="610" y="387" text-anchor="middle" dominant-baseline="central">ORT + OpenVINO EP</text>
+<text class="subtitle" x="610" y="404" text-anchor="middle" dominant-baseline="central">ONNX + IR cache</text>
+<text class="subtitle" x="610" y="420" text-anchor="middle" dominant-baseline="central">unified surface</text>
+
+<!-- Q5 trunk -->
+<line class="trunk" x1="700" y1="320" x2="700" y2="560"/>
+
+<!-- Q5 branch: Generic x86 / ARM -> CPU EP -->
+<line class="arrow" x1="700" y1="380" x2="778" y2="380" marker-end="url(#ah)"/>
+<text class="label" x="739" y="374" text-anchor="middle">x86 / ARM</text>
+
+<!-- Q5 branch: AMD GPU -> ROCm/DirectML -->
+<line class="arrow" x1="700" y1="440" x2="778" y2="440" marker-end="url(#ah)"/>
+<text class="label" x="739" y="434" text-anchor="middle">AMD GPU</text>
+
+<!-- Q5 branch: CPU-first LLM -> Chapter 10 -->
+<line class="arrow" x1="700" y1="500" x2="778" y2="500" marker-end="url(#ah)"/>
+<text class="label" x="739" y="494" text-anchor="middle">CPU-first LLM</text>
+
+<!-- Q5 branch: Mobile / embedded -> Chapter 11 -->
+<line class="arrow" x1="700" y1="560" x2="778" y2="560" marker-end="url(#ah)"/>
+<text class="label" x="739" y="554" text-anchor="middle">Mobile</text>
+
+<!-- OUTCOME: ORT + CPU EP -->
+<rect class="outcome" x="780" y="354" width="140" height="52" rx="7"/>
+<text class="title" x="850" y="369" text-anchor="middle" dominant-baseline="central">ORT + CPU EP</text>
+<text class="subtitle" x="850" y="385" text-anchor="middle" dominant-baseline="central">Quantized ONNX</text>
+<text class="subtitle" x="850" y="399" text-anchor="middle" dominant-baseline="central">portable CPUs</text>
+
+<!-- OUTCOME: ORT + ROCm / DirectML EP -->
+<rect class="outcome" x="780" y="414" width="140" height="52" rx="7"/>
+<text class="title" x="850" y="427" text-anchor="middle" dominant-baseline="central">ORT + ROCm /</text>
+<text class="title" x="850" y="440" text-anchor="middle" dominant-baseline="central">DirectML EP</text>
+<text class="subtitle" x="850" y="457" text-anchor="middle" dominant-baseline="central">Quantized ONNX</text>
+
+<!-- SPECIAL: Chapter 10 -->
+<rect class="special" x="780" y="474" width="140" height="52" rx="7"/>
+<text class="title" x="850" y="487" text-anchor="middle" dominant-baseline="central">Chapter 10</text>
+<text class="subtitle" x="850" y="502" text-anchor="middle" dominant-baseline="central">GGUF / llama.cpp</text>
+<text class="subtitle" x="850" y="517" text-anchor="middle" dominant-baseline="central">hybrid offload</text>
+
+<!-- SPECIAL: Chapter 11 -->
+<rect class="special" x="780" y="534" width="140" height="52" rx="7"/>
+<text class="title" x="850" y="547" text-anchor="middle" dominant-baseline="central">Chapter 11</text>
+<text class="subtitle" x="850" y="562" text-anchor="middle" dominant-baseline="central">TFLite / Core ML</text>
+<text class="subtitle" x="850" y="577" text-anchor="middle" dominant-baseline="central">mobile / embedded</text>
+
+</svg>
