@@ -219,3 +219,8 @@ google-*
 *Graphics*
 *_*cache*
 *.log
+results.json
+
+_*
+ch10_*.md
+*.docx
