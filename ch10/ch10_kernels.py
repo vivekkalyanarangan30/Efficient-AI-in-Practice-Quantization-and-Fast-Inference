@@ -960,10 +960,13 @@ def _fig_decode_grouped(cfg: Config, results: dict) -> Tuple[Tuple[str, str], st
     fig, ax = plt.subplots(figsize=(cfg.fig_width_in, 4.4))
 
     bench = results.get("bench", {})
+    # F09 reports only the three x86 builds — the provisional neon-m3 column
+    # is dropped so the figure carries 3 builds × 5 quants = 15 bars.
+    f09_families = BUILDS
     n_groups = len(QUANTS)
-    n_bars = len(KERNEL_FAMILIES)
+    n_bars = len(f09_families)
     group_centers = np.arange(n_groups, dtype=float)
-    bar_width = 0.18
+    bar_width = 0.22
     span = bar_width * n_bars                                          #A actual width occupied per group
 
     # Position offsets so bars are centered around each group center.
@@ -974,12 +977,12 @@ def _fig_decode_grouped(cfg: Config, results: dict) -> Tuple[Tuple[str, str], st
     # above its own bar's error-bar (1σ whisker) top in the second pass, so
     # labels stay tied to their own bars instead of floating above the group.
     ymax = 0.0
-    for k in KERNEL_FAMILIES:
+    for k in f09_families:
         for q in QUANTS:
             tps = bench.get(k, {}).get(q, {}).get("tok_per_sec", 0.0)
             ymax = max(ymax, float(tps))
 
-    for i, k in enumerate(KERNEL_FAMILIES):
+    for i, k in enumerate(f09_families):
         for j, q in enumerate(QUANTS):
             cell = bench.get(k, {}).get(q, {})
             tps = float(cell.get("tok_per_sec", 0.0))
@@ -1003,7 +1006,7 @@ def _fig_decode_grouped(cfg: Config, results: dict) -> Tuple[Tuple[str, str], st
             # gets a smaller bump because its bar is the tallest in every group,
             # so its label is already comfortably above its neighbours.
             err_top = tps * (1.0 + cv)
-            stagger = {1: ymax * 0.032, 3: ymax * 0.010}.get(i, 0.0)
+            stagger = {1: ymax * 0.032}.get(i, 0.0)
             y_offset = ymax * 0.018 + stagger
             ax.text(x, err_top + y_offset, f"{tps:.1f}",
                     ha="center", va="bottom", fontsize=5.5, color="#222")
@@ -1018,24 +1021,24 @@ def _fig_decode_grouped(cfg: Config, results: dict) -> Tuple[Tuple[str, str], st
     ax.set_ylim(0, ymax * 1.20 + 1)
     ax.set_xlim(-0.5, n_groups - 0.5)
 
-    # Legend — four kernel-family patches in a single row beneath the x-axis,
+    # Legend — three x86 build patches in a single row beneath the x-axis,
     # outside the plot area so it never lands on top of the bars.
     legend_handles = [
         Patch(facecolor=cfg.kernel_color[k], hatch=cfg.kernel_hatch[k],
               edgecolor="black", linewidth=0.6, label=k)
-        for k in KERNEL_FAMILIES
+        for k in f09_families
     ]
     ax.legend(handles=legend_handles,
               loc="upper center", bbox_to_anchor=(0.5, -0.18),
-              ncol=4, frameon=False, fontsize=7.5,
+              ncol=3, frameon=False, fontsize=7.5,
               handlelength=2.0, handleheight=1.2,
               borderaxespad=0.0, columnspacing=1.6)
 
     # Footnote sits below the legend strip.
     fig.text(
         0.5, 0.01,
-        "avx2/avx512/avx512-amx measured on the same physical CPU; only the build's "
-        "compiled-in ISA differs. neon-m3 column reused from Section 10.3 — Apple M3 / Metal.",
+        "avx2/avx512/avx512-amx measured on the same physical CPU; only the "
+        "build's compiled-in ISA differs.",
         ha="center", va="bottom", fontsize=6.5, color="#555", style="italic",
     )
 
@@ -1043,11 +1046,10 @@ def _fig_decode_grouped(cfg: Config, results: dict) -> Tuple[Tuple[str, str], st
     name = "CH10_F09_Kalyanarangan"
     paths = _save_pair(plt, fig, cfg, name)
     caption = (
-        "Decode throughput across five quantization formats on four kernel families. Bars use "
-        "diagonal hatches for the AVX-512 family, cross-hatch for AVX-512+AMX, dots for AVX-2, "
-        "back-diagonals for NEON, so the four-way grouping survives B&W print. The IQ4_XS group "
-        "is the structural answer to whether the lookup-table format pays off — that question "
-        "gets its own figure next."
+        "Decode throughput across five quantization formats on three x86 kernel builds. Bars use "
+        "dots for AVX-2, diagonal hatches for AVX-512+VNNI, and cross-hatch for AVX-512+AMX, so the "
+        "grouping survives B&W print. The IQ4_XS group is the structural answer to whether the "
+        "lookup-table format pays off — that question gets its own figure next."
     )
     return paths, caption
 
@@ -1107,8 +1109,8 @@ def _fig_crossover(cfg: Config, results: dict) -> Tuple[Tuple[str, str], str]:
     crossover = results.get("crossover", {})
     bench = results.get("bench", {})
 
-    # Order top-to-bottom: avx512-amx, avx512, neon-m3, avx2.
-    row_order = ("avx512-amx", "avx512", "neon-m3", "avx2")
+    # Order top-to-bottom: avx512-amx, avx512, avx2 (neon-m3 dropped).
+    row_order = ("avx512-amx", "avx512", "avx2")
     ys = list(range(len(row_order)))[::-1]                            #A so first row in tuple is at top
 
     # Background spans — k-quant territory left of parity, IQ-quant right.
@@ -1159,7 +1161,6 @@ def _fig_crossover(cfg: Config, results: dict) -> Tuple[Tuple[str, str], str]:
     r_avx2 = float(crossover.get("avx2", 0))
     r_avx512 = float(crossover.get("avx512", 0))
     r_amx = float(crossover.get("avx512-amx", 0))
-    r_m3 = float(crossover.get("neon-m3", 0))
     gap_winner = crossover.get("gap_winner", "?")
     gap_passed = bool(crossover.get("gate_passed", False))
     actual_gap = float(crossover.get("gap", 0))
@@ -1169,8 +1170,8 @@ def _fig_crossover(cfg: Config, results: dict) -> Tuple[Tuple[str, str], str]:
         f"hardware, same model. Ratios above 1.0 mean IQ4_XS wins despite being the more "
         f"complex format; ratios below 1.0 mean the codebook lookups serialize faster than "
         f"the bandwidth saving recovers. Measured: avx2 = {r_avx2:.2f}, avx512 = {r_avx512:.2f}, "
-        f"avx512-amx = {r_amx:.2f}, neon-m3 = {r_m3:.2f}. The {gap_winner} kernel family flips "
-        f"the ranking — the deployment guidance in 10.4.5 keys off this number."
+        f"avx512-amx = {r_amx:.2f}. The {gap_winner} kernel family flips the ranking — the "
+        f"deployment guidance in 10.4.5 keys off this number."
     )
     if not gap_passed:
         caption = (
