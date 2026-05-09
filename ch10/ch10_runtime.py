@@ -680,12 +680,14 @@ def _fig_memory(results: dict, plt) -> tuple[list[str], str]:
         elif not comp_inline:
             ax.text(x_outside, i, f"comp {c:.1f}", va="center", ha="left", fontsize=7)
 
-    ax.legend(loc="lower right", framealpha=0.95)
+    ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.12),
+              ncol=3, frameon=False, fontsize=8, handlelength=2.0,
+              columnspacing=2.0)
     ax.set_axisbelow(True)
     ax.xaxis.grid(True, which="major", linestyle="--", alpha=0.35)
     ax.yaxis.grid(False)
 
-    fig.tight_layout()
+    fig.tight_layout(rect=(0, 0.06, 1, 1))
     paths = _save_pair(fig, "CH10_F11_Kalyanarangan")
     plt.close(fig)
 
