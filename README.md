@@ -14,6 +14,10 @@ Code repository for the book *[Efficient AI in Practice: Quantization and Fast I
 | 4 | [Calibration & Post-Training Quantization](ch4/) | [Range Estimation](ch4/range_estimation_demo.py) &bull; [Calibration Stability](ch4/calibration_stability.py) &bull; [Vision Calibration](ch4/vision_calibration_analysis.py) &bull; [LLM Calibration](ch4/llm_calibration_builder.py) &bull; [Bitwidth Analysis](ch4/ptq_bitwidth_analysis.py) &bull; [Equalization](ch4/ch4_equalization_multi_arch.py) &bull; [Validation](ch4/validate_calibration.py) |
 | 5 | [Quantization-Aware Training](ch5/) | [Fake Quantization & STE](ch5/ch5_fake_quantization_ste.py) &bull; [Per-Channel QAT](ch5/ch5_per_channel_qat.py) &bull; [PTQ Failure Diagnostics](ch5/ch5_ptq_failure_diagnostics.py) &bull; [QAT Schedules](ch5/ch5_qat_schedule.py) &bull; [Transformer QAT](ch5/ch5_transformer_qat.py) |
 | 6 | [Quantization Pathways](ch6/) | [PyTorch TorchAO Path](ch6/ch6_pytorch_torchao_path.py) &bull; [ONNX Export Path](ch6/ch6_onnx_export_path.py) &bull; [TF MOT Path](ch6/ch6_tf_mot_path.py) &bull; [Verify Equivalence](ch6/ch6_verify_equivalence.py) |
+| 7 | [Quantizing Large Language Models in Practice](ch7/) | [7.1 Outlier Profiling](ch7/ch7_outlier_profiling.py) &bull; [7.2 LLM.int8() Decomposition](ch7/ch7_llm_int8_decomposition.py) &bull; [7.2 LLM.int8() Flow](ch7/ch7_llm_int8_flow.py) &bull; [7.3 GPTQ](ch7/ch7_gptq_quantization.py) &bull; [7.4 AWQ](ch7/ch7_awq_quantization.py) &bull; [7.5 TurboQuant KV Cache](ch7/ch7_turboquant_kv_cache.py) &bull; [Decision Tree](ch7/ch7_quant_decision_tree.py) |
+| 8 | [Sub-8-bit Formats](ch8/) | [8.2 FP8 Formats](ch8/ch8_fp8_formats.py) &bull; [8.3 FP4 Blockscale](ch8/ch8_fp4_blockscale.py) &bull; [8.4 QLoRA NF4](ch8/ch8_qlora_nf4.py) &bull; [8.5 Ternary 1.58-bit](ch8/ch8_ternary.py) &bull; [Pareto Frontier](ch8/ch8_pareto_frontier.py) |
+| 9 | [Deployment Pipelines](ch9/) | [9.2 ORT + Optimum](ch9/ch9_ort_optimum_deployment.py) &bull; [9.3 TensorRT Engines](ch9/ch9_tensorrt_engines.py) &bull; [9.4 OpenVINO](ch9/ch9_openvino_deployment.py) &bull; [9.5 Packaging & Serving](ch9/ch9_packaging_serving.py) |
+| 10 | [CPU-Friendly LLM Serving with llama.cpp / GGUF](ch10/) | [10.1 Cost Curve](ch10/ch10_cost_curve.py) &bull; [10.2 GGUF Format](ch10/ch10_gguf_format.py) &bull; [10.3 HF → GGUF Convert](ch10/ch10_convert.py) &bull; [10.4 Kernel Families](ch10/ch10_kernels.py) &bull; [10.5 Runtime & Throughput](ch10/ch10_runtime.py) |
 
 <br>
 
@@ -36,6 +40,18 @@ Fake quantization nodes, straight-through estimators, observer-based scale compu
 
 ### Ch 6 — Quantization Pathways
 Weight-only quantization via PyTorch TorchAO, ONNX Runtime dynamic and static quantization with mixed-precision analysis, TensorFlow Lite post-training quantization (dynamic, full-integer, float16), and cross-framework numerical equivalence verification.
+
+### Ch 7 — Quantizing Large Language Models in Practice
+Activation outlier profiling on OPT, LLM.int8() mixed-precision decomposition, GPTQ Hessian-aware groupwise quantization, AWQ activation-aware weight protection, and TurboQuant KV-cache vector quantization — each method built from scratch and validated against its production library (bitsandbytes, gptqmodel, autoawq).
+
+### Ch 8 — Sub-8-bit Formats
+FP8 (E4M3 / E5M2) formats and kernel caveats, FP4 (E2M1) with blockwise scaling, NF4 with QLoRA fine-tuning, and ternary (1.58-bit) BitNet models — covering the encode/decode internals, the sub-8-bit Pareto frontier on OPT-6.7B, and end-to-end perplexity comparisons.
+
+### Ch 9 — Deployment Pipelines
+Deploying quantized artifacts through ONNX Runtime + Optimum across CPU / CUDA / TensorRT execution providers, building real INT8 TensorRT engines (implicit vs explicit QDQ), OpenVINO standalone vs via-ORT on Intel silicon, and packaging models for serving with manifests, Triton config.pbtxt, and provenance metadata.
+
+### Ch 10 — CPU-Friendly LLM Serving with llama.cpp / GGUF
+The cost-per-million-tokens curve for self-hosted inference, the GGUF v3 file format dissected byte by byte, the safetensors → GGUF → quantized-variant pipeline on Llama-2-7B, x86 kernel families (AVX-2 vs AVX-512+VNNI vs AMX) compared against Apple Silicon NEON/Metal, and runtime memory + throughput measurement.
 
 <br>
 
@@ -68,7 +84,8 @@ The book uses a variety of models to demonstrate quantization across architectur
 | Domain | Models |
 |--------|--------|
 | Vision | ResNet-18, MobileNetV2, ViT-B/16 |
-| Language | BERT, TinyLlama |
+| Language (small) | BERT, TinyLlama |
+| Language (LLM) | OPT-125m / 1.3B / 2.7B / 6.7B, Llama-2-7B, BitNet b1.58 2B4T |
 
 <br>
 
