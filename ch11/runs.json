@@ -1,0 +1,5849 @@
+{
+  "schema_version": "11.0",
+  "records": [
+    {
+      "model": "smoke_tinyconv",
+      "variant": "fp32",
+      "backend": "tflite",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": 3196,
+      "params": null,
+      "quantization": null,
+      "compute_units": null,
+      "latency_ms": {
+        "p50": 0.006604532245546579,
+        "p95": 0.007381528848782181,
+        "mean": 0.0067419023253023624,
+        "n_iters": 10,
+        "warmup_iters": 3,
+        "input_shape": [
+          1,
+          32,
+          32,
+          3
+        ]
+      },
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T04:18:24Z",
+      "script": "ch11_2_tflite.py",
+      "notes": "smoke run; tensorflow 2.19.1; python arch=arm64; native arm64"
+    },
+    {
+      "model": "smoke_decode",
+      "variant": "vision_smoke_pil",
+      "backend": "prepost",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": null,
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": {
+        "decode_ms": 8.770395943429321,
+        "resize_ms": null,
+        "normalize_ms": null,
+        "tokenize_ms": null,
+        "detokenize_ms": null,
+        "logmel_ms": null,
+        "nms_ms": null
+      },
+      "timestamp": "2026-05-10T04:18:35Z",
+      "script": "ch11_5_prepost.py",
+      "notes": "smoke run; 10 iters of 4-image PIL decode."
+    },
+    {
+      "model": "smoke_tinyconv",
+      "variant": "coreml_fp16",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": 5206,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndNeuralEngine",
+      "latency_ms": {
+        "p50": 0.04493747837841511,
+        "p95": 0.05414994666352868,
+        "mean": 0.04596259677782655,
+        "n_iters": 10,
+        "warmup_iters": 3,
+        "input_shape": [
+          1,
+          3,
+          32,
+          32
+        ]
+      },
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T04:18:59Z",
+      "script": "ch11_3_apple.py",
+      "notes": "ch11_3 smoke"
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_fp16",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": null,
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": {
+        "metric": "top1",
+        "value": 0.667,
+        "secondary": {
+          "top5": 0.876
+        },
+        "dataset": "imagenet_val_subset",
+        "n_samples": 1000
+      },
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T09:11:28Z",
+      "script": "ch11_3_apple.py",
+      "notes": "accuracy on CPU_ONLY (numerics platform-independent)."
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_int8_linear",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": null,
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": {
+        "metric": "top1",
+        "value": 0.664,
+        "secondary": {
+          "top5": 0.88
+        },
+        "dataset": "imagenet_val_subset",
+        "n_samples": 1000
+      },
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T09:11:36Z",
+      "script": "ch11_3_apple.py",
+      "notes": "accuracy on CPU_ONLY (numerics platform-independent)."
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_int8_weight_only",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": null,
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": {
+        "metric": "top1",
+        "value": 0.664,
+        "secondary": {
+          "top5": 0.878
+        },
+        "dataset": "imagenet_val_subset",
+        "n_samples": 1000
+      },
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T09:11:43Z",
+      "script": "ch11_3_apple.py",
+      "notes": "accuracy on CPU_ONLY (numerics platform-independent)."
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_palettize_4bit",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": null,
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": {
+        "metric": "top1",
+        "value": 0.154,
+        "secondary": {
+          "top5": 0.329
+        },
+        "dataset": "imagenet_val_subset",
+        "n_samples": 1000
+      },
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T09:11:51Z",
+      "script": "ch11_3_apple.py",
+      "notes": "accuracy on CPU_ONLY (numerics platform-independent)."
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_palettize_6bit",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": null,
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": {
+        "metric": "top1",
+        "value": 0.631,
+        "secondary": {
+          "top5": 0.858
+        },
+        "dataset": "imagenet_val_subset",
+        "n_samples": 1000
+      },
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T09:11:58Z",
+      "script": "ch11_3_apple.py",
+      "notes": "accuracy on CPU_ONLY (numerics platform-independent)."
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_fp16",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": 9353302,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuOnly",
+      "latency_ms": {
+        "p50": 2.993312547914684,
+        "p95": 3.2577520294580604,
+        "mean": 3.0450333119370043,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          3,
+          224,
+          224
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 328.40363226236127,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:28:58Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_fp16",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": 9353302,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndGPU",
+      "latency_ms": {
+        "p50": 2.618000435177237,
+        "p95": 3.4810444805771104,
+        "mean": 2.790158136631362,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          3,
+          224,
+          224
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 358.4026248803692,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:28:59Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_fp16",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": 9353302,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndNeuralEngine",
+      "latency_ms": {
+        "p50": 0.4931249422952533,
+        "p95": 0.5599163006991145,
+        "mean": 0.5000991461565718,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          3,
+          224,
+          224
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 1999.6034939978051,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:29:00Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_fp16",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": 9353302,
+      "params": null,
+      "quantization": null,
+      "compute_units": "all",
+      "latency_ms": {
+        "p50": 0.4958125064149499,
+        "p95": 0.5497395410202442,
+        "mean": 0.4984396044164896,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          3,
+          224,
+          224
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 2006.261121988238,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:29:01Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_int8_linear",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": 4811312,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuOnly",
+      "latency_ms": {
+        "p50": 2.9604589799419045,
+        "p95": 3.1651993573177606,
+        "mean": 2.991732497466728,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          3,
+          224,
+          224
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 334.25448326237637,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:29:02Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_int8_linear",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": 4811312,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndGPU",
+      "latency_ms": {
+        "p50": 1.5405210433527827,
+        "p95": 1.8779937643557778,
+        "mean": 1.5964175021508709,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          3,
+          224,
+          224
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 626.4025536256581,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:29:03Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_int8_linear",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": 4811312,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndNeuralEngine",
+      "latency_ms": {
+        "p50": 0.4077919293195009,
+        "p95": 0.4498485592193901,
+        "mean": 0.4126351641025394,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          3,
+          224,
+          224
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 2423.448331590812,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:29:04Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_int8_linear",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": 4811312,
+      "params": null,
+      "quantization": null,
+      "compute_units": "all",
+      "latency_ms": {
+        "p50": 0.3980415058322251,
+        "p95": 0.4570562625303863,
+        "mean": 0.41419755783863366,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          3,
+          224,
+          224
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 2414.3068472402433,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:29:04Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_int8_weight_only",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": 4829431,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuOnly",
+      "latency_ms": {
+        "p50": 2.9872499871999025,
+        "p95": 3.2204502844251692,
+        "mean": 3.019244725583121,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          3,
+          224,
+          224
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 331.20866007536546,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:29:05Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_int8_weight_only",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": 4829431,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndGPU",
+      "latency_ms": {
+        "p50": 2.56295851431787,
+        "p95": 3.34870564402081,
+        "mean": 2.7098402252886444,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          3,
+          224,
+          224
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 369.02544683920723,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:29:07Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_int8_weight_only",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": 4829431,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndNeuralEngine",
+      "latency_ms": {
+        "p50": 0.48014603089541197,
+        "p95": 0.5345579178538172,
+        "mean": 0.4876828857231885,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          3,
+          224,
+          224
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 2050.5128009917607,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:29:07Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_int8_weight_only",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": 4829431,
+      "params": null,
+      "quantization": null,
+      "compute_units": "all",
+      "latency_ms": {
+        "p50": 0.4820415051653981,
+        "p95": 0.5509496782906351,
+        "mean": 0.4984104254981503,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          3,
+          224,
+          224
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 2006.3785764523725,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:29:08Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_palettize_4bit",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": 2459828,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuOnly",
+      "latency_ms": {
+        "p50": 3.005021018907428,
+        "p95": 3.5074437037110324,
+        "mean": 3.0776533199241385,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          3,
+          224,
+          224
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 324.92288638430824,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:29:09Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_palettize_4bit",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": 2459828,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndGPU",
+      "latency_ms": {
+        "p50": 2.6320830220356584,
+        "p95": 3.6089517991058524,
+        "mean": 2.792696887627244,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          3,
+          224,
+          224
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 358.0768125715315,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:29:10Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_palettize_4bit",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": 2459828,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndNeuralEngine",
+      "latency_ms": {
+        "p50": 0.3586044767871499,
+        "p95": 0.40678133955225326,
+        "mean": 0.3663708397652954,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          3,
+          224,
+          224
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 2729.474869344461,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:29:11Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_palettize_4bit",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": 2459828,
+      "params": null,
+      "quantization": null,
+      "compute_units": "all",
+      "latency_ms": {
+        "p50": 0.3669375437311828,
+        "p95": 0.41013750596903265,
+        "mean": 0.37301582691725343,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          3,
+          224,
+          224
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 2680.851395138875,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:29:12Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_palettize_6bit",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": 3613887,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuOnly",
+      "latency_ms": {
+        "p50": 2.9297705041244626,
+        "p95": 3.1432919204235077,
+        "mean": 2.9642137489281595,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          3,
+          224,
+          224
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 337.35758777908427,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:29:13Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_palettize_6bit",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": 3613887,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndGPU",
+      "latency_ms": {
+        "p50": 2.6034999755211174,
+        "p95": 3.5591149295214564,
+        "mean": 2.7786553907208145,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          3,
+          224,
+          224
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 359.8862972858929,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:29:14Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_palettize_6bit",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": 3613887,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndNeuralEngine",
+      "latency_ms": {
+        "p50": 0.3832920338027179,
+        "p95": 0.4503231029957533,
+        "mean": 0.3991266281809658,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          3,
+          224,
+          224
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 2505.4705183603924,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:29:14Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_palettize_6bit",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": 3613887,
+      "params": null,
+      "quantization": null,
+      "compute_units": "all",
+      "latency_ms": {
+        "p50": 0.3884999896399677,
+        "p95": 0.4288798023480922,
+        "mean": 0.39288596832193434,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          3,
+          224,
+          224
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 2545.2677892038914,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:29:15Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "vision_decode_pil_resize_pil_normalize_loop",
+      "backend": "prepost",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": null,
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": {
+        "decode_ms": 29.846958466805518,
+        "resize_ms": 26.74322947859764,
+        "normalize_ms": 7.114583044312894,
+        "tokenize_ms": null,
+        "detokenize_ms": null,
+        "logmel_ms": null,
+        "nms_ms": null
+      },
+      "timestamp": "2026-05-10T04:26:47Z",
+      "script": "ch11_5_prepost.py",
+      "notes": "per-batch median over 16 synthetic JPEGs (640\u00d7480\u2192224\u00d7224)."
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "vision_decode_cv2_resize_cv2_normalize_vec",
+      "backend": "prepost",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": null,
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": {
+        "decode_ms": 28.720604546833783,
+        "resize_ms": 28.114374552387744,
+        "normalize_ms": 7.307520951144397,
+        "tokenize_ms": null,
+        "detokenize_ms": null,
+        "logmel_ms": null,
+        "nms_ms": null
+      },
+      "timestamp": "2026-05-10T04:26:47Z",
+      "script": "ch11_5_prepost.py",
+      "notes": "per-batch median over 16 synthetic JPEGs (640\u00d7480\u2192224\u00d7224)."
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "vision_decode_tf_resize_tf_normalize_vec",
+      "backend": "prepost",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": null,
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": {
+        "decode_ms": 40.029583033174276,
+        "resize_ms": 3.501957980915904,
+        "normalize_ms": 7.307520951144397,
+        "tokenize_ms": null,
+        "detokenize_ms": null,
+        "logmel_ms": null,
+        "nms_ms": null
+      },
+      "timestamp": "2026-05-10T04:26:47Z",
+      "script": "ch11_5_prepost.py",
+      "notes": "per-batch median over 16 synthetic JPEGs (640\u00d7480\u2192224\u00d7224)."
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "audio_dec_sf_res_scipy_lm_manual",
+      "backend": "prepost",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "audio",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": null,
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": {
+        "decode_ms": 10.417104524094611,
+        "resize_ms": 0.8738545002415776,
+        "normalize_ms": null,
+        "tokenize_ms": null,
+        "detokenize_ms": null,
+        "logmel_ms": 74.86389554105699,
+        "nms_ms": null
+      },
+      "timestamp": "2026-05-10T04:27:10Z",
+      "script": "ch11_5_prepost.py",
+      "notes": "per-batch median over 8 clips."
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "audio_dec_lib_res_lib_lm_torchaudio",
+      "backend": "prepost",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "audio",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": null,
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": {
+        "decode_ms": 17.15533301467076,
+        "resize_ms": 0.26377098402008414,
+        "normalize_ms": null,
+        "tokenize_ms": null,
+        "detokenize_ms": null,
+        "logmel_ms": 20.30979102710262,
+        "nms_ms": null
+      },
+      "timestamp": "2026-05-10T04:27:10Z",
+      "script": "ch11_5_prepost.py",
+      "notes": "per-batch median over 8 clips."
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "audio_dec_sf_res_torch_lm_whisper",
+      "backend": "prepost",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "audio",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": null,
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": {
+        "decode_ms": 10.417104524094611,
+        "resize_ms": 0.01843745121732354,
+        "normalize_ms": null,
+        "tokenize_ms": null,
+        "detokenize_ms": null,
+        "logmel_ms": 22.447917028330266,
+        "nms_ms": null
+      },
+      "timestamp": "2026-05-10T04:27:10Z",
+      "script": "ch11_5_prepost.py",
+      "notes": "per-batch median over 8 clips."
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_palettize_4bit",
+      "backend": "prepost",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndNeuralEngine",
+      "latency_ms": {
+        "p50": 0.9371874621137977,
+        "p95": 1.0663880209904164,
+        "mean": 0.9602397331036627,
+        "n_iters": 8,
+        "warmup_iters": 6,
+        "input_shape": [
+          1,
+          224,
+          224,
+          3
+        ]
+      },
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": {
+        "decode_ms": 1.9338334677740932,
+        "resize_ms": 1.8214169540442526,
+        "normalize_ms": 0.02843746915459633,
+        "tokenize_ms": null,
+        "detokenize_ms": null,
+        "logmel_ms": null,
+        "nms_ms": null
+      },
+      "timestamp": "2026-05-10T04:28:39Z",
+      "script": "ch11_5_prepost.py",
+      "notes": "end-to-end vision pipeline; per-stage median over JPEGs."
+    },
+    {
+      "model": "llama_3_2_1b_instruct",
+      "variant": "mlx_fp16",
+      "backend": "mlx",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "text",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": null,
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": {
+        "metric": "hellaswag_single_token_heuristic",
+        "value": 0.32,
+        "secondary": null,
+        "dataset": "hellaswag_val_200",
+        "n_samples": 200
+      },
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T09:13:47Z",
+      "script": "ch11_3_apple.py",
+      "notes": "single-token greedy choice; heuristic not loglik-based."
+    },
+    {
+      "model": "llama_3_2_1b_instruct",
+      "variant": "mlx_q4_g128",
+      "backend": "mlx",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "text",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": null,
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": {
+        "metric": "hellaswag_single_token_heuristic",
+        "value": 0.335,
+        "secondary": null,
+        "dataset": "hellaswag_val_200",
+        "n_samples": 200
+      },
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T09:14:31Z",
+      "script": "ch11_3_apple.py",
+      "notes": "single-token greedy choice; heuristic not loglik-based."
+    },
+    {
+      "model": "llama_3_2_1b_instruct",
+      "variant": "mlx_q8_g128",
+      "backend": "mlx",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "text",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": null,
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": {
+        "metric": "hellaswag_single_token_heuristic",
+        "value": 0.31,
+        "secondary": null,
+        "dataset": "hellaswag_val_200",
+        "n_samples": 200
+      },
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T09:15:20Z",
+      "script": "ch11_3_apple.py",
+      "notes": "single-token greedy choice; heuristic not loglik-based."
+    },
+    {
+      "model": "llama_3_2_1b_instruct",
+      "variant": "mlx_fp16",
+      "backend": "mlx",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "text",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": "prompt_32",
+      "latency_ms": {
+        "p50": 33.86487890747958,
+        "p95": null,
+        "mean": 33.86487890747958,
+        "n_iters": 64,
+        "warmup_iters": 0,
+        "input_shape": [
+          1,
+          32
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": null,
+        "tokens_per_sec": 29.52911784306232,
+        "prompt_length": 32,
+        "generation_length": 64
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T04:33:10Z",
+      "script": "ch11_3_apple.py",
+      "notes": "single greedy run; 319 chars produced"
+    },
+    {
+      "model": "llama_3_2_1b_instruct",
+      "variant": "mlx_fp16",
+      "backend": "mlx",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "text",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": "prompt_256",
+      "latency_ms": {
+        "p50": 33.63096093744389,
+        "p95": null,
+        "mean": 33.63096093744389,
+        "n_iters": 64,
+        "warmup_iters": 0,
+        "input_shape": [
+          1,
+          256
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": null,
+        "tokens_per_sec": 29.73450570919086,
+        "prompt_length": 256,
+        "generation_length": 64
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T04:33:12Z",
+      "script": "ch11_3_apple.py",
+      "notes": "single greedy run; 319 chars produced"
+    },
+    {
+      "model": "llama_3_2_1b_instruct",
+      "variant": "mlx_fp16",
+      "backend": "mlx",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "text",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": "prompt_1024",
+      "latency_ms": {
+        "p50": 39.7068209695135,
+        "p95": null,
+        "mean": 39.7068209695135,
+        "n_iters": 64,
+        "warmup_iters": 0,
+        "input_shape": [
+          1,
+          1024
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": null,
+        "tokens_per_sec": 25.18458984081828,
+        "prompt_length": 1024,
+        "generation_length": 64
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T04:33:15Z",
+      "script": "ch11_3_apple.py",
+      "notes": "single greedy run; 319 chars produced"
+    },
+    {
+      "model": "llama_3_2_1b_instruct",
+      "variant": "mlx_q4_g128",
+      "backend": "mlx",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "text",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": "prompt_32",
+      "latency_ms": {
+        "p50": 12.731267577692051,
+        "p95": null,
+        "mean": 12.731267577692051,
+        "n_iters": 64,
+        "warmup_iters": 0,
+        "input_shape": [
+          1,
+          32
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": null,
+        "tokens_per_sec": 78.54677422319027,
+        "prompt_length": 32,
+        "generation_length": 64
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T04:33:17Z",
+      "script": "ch11_3_apple.py",
+      "notes": "single greedy run; 319 chars produced"
+    },
+    {
+      "model": "llama_3_2_1b_instruct",
+      "variant": "mlx_q4_g128",
+      "backend": "mlx",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "text",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": "prompt_256",
+      "latency_ms": {
+        "p50": 12.730634123727214,
+        "p95": null,
+        "mean": 12.730634123727214,
+        "n_iters": 64,
+        "warmup_iters": 0,
+        "input_shape": [
+          1,
+          256
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": null,
+        "tokens_per_sec": 78.55068257253669,
+        "prompt_length": 256,
+        "generation_length": 64
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T04:33:18Z",
+      "script": "ch11_3_apple.py",
+      "notes": "single greedy run; 319 chars produced"
+    },
+    {
+      "model": "llama_3_2_1b_instruct",
+      "variant": "mlx_q4_g128",
+      "backend": "mlx",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "text",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": "prompt_1024",
+      "latency_ms": {
+        "p50": 19.84481967156171,
+        "p95": null,
+        "mean": 19.84481967156171,
+        "n_iters": 64,
+        "warmup_iters": 0,
+        "input_shape": [
+          1,
+          1024
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": null,
+        "tokens_per_sec": 50.39098447606624,
+        "prompt_length": 1024,
+        "generation_length": 64
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T04:33:19Z",
+      "script": "ch11_3_apple.py",
+      "notes": "single greedy run; 319 chars produced"
+    },
+    {
+      "model": "llama_3_2_1b_instruct",
+      "variant": "mlx_q8_g128",
+      "backend": "mlx",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "text",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": "prompt_32",
+      "latency_ms": {
+        "p50": 18.32098178056185,
+        "p95": null,
+        "mean": 18.32098178056185,
+        "n_iters": 64,
+        "warmup_iters": 0,
+        "input_shape": [
+          1,
+          32
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": null,
+        "tokens_per_sec": 54.582227741800246,
+        "prompt_length": 32,
+        "generation_length": 64
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T04:33:22Z",
+      "script": "ch11_3_apple.py",
+      "notes": "single greedy run; 319 chars produced"
+    },
+    {
+      "model": "llama_3_2_1b_instruct",
+      "variant": "mlx_q8_g128",
+      "backend": "mlx",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "text",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": "prompt_256",
+      "latency_ms": {
+        "p50": 20.545121749819373,
+        "p95": null,
+        "mean": 20.545121749819373,
+        "n_iters": 64,
+        "warmup_iters": 0,
+        "input_shape": [
+          1,
+          256
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": null,
+        "tokens_per_sec": 48.67335478354085,
+        "prompt_length": 256,
+        "generation_length": 64
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T04:33:23Z",
+      "script": "ch11_3_apple.py",
+      "notes": "single greedy run; 319 chars produced"
+    },
+    {
+      "model": "llama_3_2_1b_instruct",
+      "variant": "mlx_q8_g128",
+      "backend": "mlx",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "text",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": "prompt_1024",
+      "latency_ms": {
+        "p50": 27.63389843676123,
+        "p95": null,
+        "mean": 27.63389843676123,
+        "n_iters": 64,
+        "warmup_iters": 0,
+        "input_shape": [
+          1,
+          1024
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": null,
+        "tokens_per_sec": 36.187438492923796,
+        "prompt_length": 1024,
+        "generation_length": 64
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T04:33:25Z",
+      "script": "ch11_3_apple.py",
+      "notes": "single greedy run; 319 chars produced"
+    },
+    {
+      "model": "llama_3_2_1b_instruct",
+      "variant": "hf_tokenizers",
+      "backend": "prepost",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "text",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": null,
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": {
+        "decode_ms": null,
+        "resize_ms": null,
+        "normalize_ms": null,
+        "tokenize_ms": 0.797062530182302,
+        "detokenize_ms": 0.11597905540838838,
+        "logmel_ms": null,
+        "nms_ms": null
+      },
+      "timestamp": "2026-05-10T04:33:51Z",
+      "script": "ch11_5_prepost.py",
+      "notes": "detokenize per-token = 0.255 ms (128 tokens); KV alloc surrogate = 0.5573329981416464 ms"
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_fp16",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "audio",
+      "size_bytes": 16462375,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndNeuralEngine",
+      "latency_ms": {
+        "p50": 14.653791557066143,
+        "p95": 15.292252047220245,
+        "mean": 14.705201016040519,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          80,
+          3000
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 68.00315064780102,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:29:34Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_fp16",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "audio",
+      "size_bytes": 16462375,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuOnly",
+      "latency_ms": {
+        "p50": 36.12033347599208,
+        "p95": 38.91701633692719,
+        "mean": 36.47501086874399,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          80,
+          3000
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 27.416030213082557,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:29:24Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_fp16",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "audio",
+      "size_bytes": 16462375,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndGPU",
+      "latency_ms": {
+        "p50": 20.253645488992333,
+        "p95": 21.347204729681835,
+        "mean": 20.280188107280992,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          80,
+          3000
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 49.309207326384715,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:29:30Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_fp16",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "audio",
+      "size_bytes": 16462375,
+      "params": null,
+      "quantization": null,
+      "compute_units": "all",
+      "latency_ms": {
+        "p50": 14.588520978577435,
+        "p95": 15.469133562874049,
+        "mean": 14.721632502041757,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          80,
+          3000
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 67.927249227374,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:29:39Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_int8_weight_only",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "audio",
+      "size_bytes": 8331566,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuOnly",
+      "latency_ms": {
+        "p50": 36.12895851256326,
+        "p95": 40.273081202758476,
+        "mean": 36.57571710180491,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          80,
+          3000
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 27.34054392471919,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:30:14Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_int8_weight_only",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "audio",
+      "size_bytes": 8331566,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndGPU",
+      "latency_ms": {
+        "p50": 24.756770522799343,
+        "p95": 26.1673562170472,
+        "mean": 24.826093537267298,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          80,
+          3000
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 40.280199480392106,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:30:20Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_int8_weight_only",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "audio",
+      "size_bytes": 8331566,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndNeuralEngine",
+      "latency_ms": {
+        "p50": 14.492853952106088,
+        "p95": 15.450383402639996,
+        "mean": 14.587556847254746,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          80,
+          3000
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 68.55157518636793,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:30:25Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_int8_weight_only",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "audio",
+      "size_bytes": 8331566,
+      "params": null,
+      "quantization": null,
+      "compute_units": "all",
+      "latency_ms": {
+        "p50": 14.558895956724882,
+        "p95": 15.418392332503572,
+        "mean": 14.663330445764586,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          80,
+          3000
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 68.19733100189691,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:30:30Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_palettize_4bit",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndNeuralEngine_sustained_60s",
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": {
+        "window_s": 60,
+        "throughput_first_30s": 2176.1956196058018,
+        "throughput_last_30s": 1401.3556076190196,
+        "thermal_pressure_observed": null
+      },
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T04:39:19Z",
+      "script": "ch11_3_apple.py",
+      "notes": "sustained 60s; 107168 iterations completed."
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_fp16",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "audio",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndNeuralEngine_sustained_60s",
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": {
+        "window_s": 60,
+        "throughput_first_30s": 62.39676833126503,
+        "throughput_last_30s": 63.18948208555257,
+        "thermal_pressure_observed": null
+      },
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T04:40:20Z",
+      "script": "ch11_3_apple.py",
+      "notes": "sustained 60s; 3767 iterations completed."
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "fp32",
+      "backend": "tflite",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": 18554400,
+      "params": null,
+      "quantization": null,
+      "compute_units": null,
+      "latency_ms": {
+        "p50": 10.0296659511514,
+        "p95": 10.460908390814438,
+        "mean": 10.112615176476538,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          224,
+          224,
+          3
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 98.88638918310174,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T10:02:46Z",
+      "script": "ch11_2_tflite.py",
+      "notes": "tensorflow 2.20.0; python arch=arm64; native arm64"
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_palettize_4bit",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndNeuralEngine_sustained_300s",
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": {
+        "mean": 6598.8561872909695,
+        "peak": 15979.0,
+        "source": "powermetrics",
+        "window_s": 299
+      },
+      "sustained": {
+        "window_s": 300,
+        "throughput_first_30s": 2657.9789087350428,
+        "throughput_last_30s": 2355.705089069719,
+        "thermal_pressure_observed": null
+      },
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T05:41:59Z",
+      "script": "ch11_3_apple.py",
+      "notes": "sustained 300s; 784624 iterations completed."
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "mps_fp16",
+      "backend": "mps",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": null,
+      "latency_ms": {
+        "p50": 17.585270514246076,
+        "p95": 120.71065265336071,
+        "mean": 41.966862448025495,
+        "n_iters": 50,
+        "warmup_iters": 10,
+        "input_shape": [
+          1,
+          3,
+          224,
+          224
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 23.828324103057867,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T05:02:27Z",
+      "script": "ch11_3_apple.py",
+      "notes": "EfficientNet-Lite0 from timm on MPS; apples-to-apples with Core ML variants."
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "mps_fp32",
+      "backend": "mps",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": null,
+      "latency_ms": {
+        "p50": 21.57818793784827,
+        "p95": 126.23279022518543,
+        "mean": 48.98417748045176,
+        "n_iters": 50,
+        "warmup_iters": 10,
+        "input_shape": [
+          1,
+          3,
+          224,
+          224
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 20.414755364608755,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T05:02:35Z",
+      "script": "ch11_3_apple.py",
+      "notes": "EfficientNet-Lite0 from timm on MPS; apples-to-apples with Core ML variants."
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_fp16",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "audio",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndNeuralEngine_sustained_300s",
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": {
+        "mean": 2756.7458193979933,
+        "peak": 5013.0,
+        "source": "powermetrics",
+        "window_s": 299
+      },
+      "sustained": {
+        "window_s": 300,
+        "throughput_first_30s": 43.09205318296424,
+        "throughput_last_30s": 66.39501448561568,
+        "thermal_pressure_observed": null
+      },
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T05:47:01Z",
+      "script": "ch11_3_apple.py",
+      "notes": "sustained 300s; 17297 iterations completed."
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_palettize_4bit",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndNeuralEngine_power_30s",
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": {
+        "mean": 6304.566666666667,
+        "peak": 7449.0,
+        "source": "powermetrics",
+        "window_s": 30
+      },
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T06:26:57Z",
+      "script": "ch11_3_apple.py",
+      "notes": "30s window; 79652 iters"
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_fp16",
+      "backend": "coreml",
+      "device": {
+        "name": "iPhone 16",
+        "soc": "iPhone 16",
+        "os": "iOS 26.3.1",
+        "class": "phone"
+      },
+      "modality": "vision",
+      "size_bytes": 9353302,
+      "params": null,
+      "quantization": null,
+      "compute_units": "all",
+      "latency_ms": {
+        "p50": 0.5069971084594727,
+        "p95": 0.6707370281219481,
+        "mean": 0.5531817674636841,
+        "n_iters": 120,
+        "warmup_iters": null,
+        "input_shape": null
+      },
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": {
+        "ane_fraction": 1.0,
+        "gpu_fraction": 0.0,
+        "cpu_fraction": 0.0,
+        "fallback_ops": [],
+        "source": "xcode_performance_report",
+        "num_compute_operations": 101,
+        "fractions_source": "coremltools_compute_plan"
+      },
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:19:30Z",
+      "script": "ch11_3_apple.py",
+      "notes": "ingested from Xcode 16 .mlperf bundle; per-iteration latency is the report's own predict.samples. ANE/GPU/CPU per-op fractions not exposed in JSON \u2014 only numOperations recorded."
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_int8_linear",
+      "backend": "coreml",
+      "device": {
+        "name": "iPhone 16",
+        "soc": "iPhone 16",
+        "os": "iOS 26.3.1",
+        "class": "phone"
+      },
+      "modality": "vision",
+      "size_bytes": 4811312,
+      "params": null,
+      "quantization": null,
+      "compute_units": "all",
+      "latency_ms": {
+        "p50": 0.42897462844848633,
+        "p95": 0.5763709545135498,
+        "mean": 0.4837910334269206,
+        "n_iters": 120,
+        "warmup_iters": null,
+        "input_shape": null
+      },
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": {
+        "ane_fraction": 1.0,
+        "gpu_fraction": 0.0,
+        "cpu_fraction": 0.0,
+        "fallback_ops": [],
+        "source": "xcode_performance_report",
+        "num_compute_operations": 101,
+        "fractions_source": "coremltools_compute_plan"
+      },
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:19:32Z",
+      "script": "ch11_3_apple.py",
+      "notes": "ingested from Xcode 16 .mlperf bundle; per-iteration latency is the report's own predict.samples. ANE/GPU/CPU per-op fractions not exposed in JSON \u2014 only numOperations recorded."
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_int8_weight_only",
+      "backend": "coreml",
+      "device": {
+        "name": "iPhone 16",
+        "soc": "iPhone 16",
+        "os": "iOS 26.3.1",
+        "class": "phone"
+      },
+      "modality": "vision",
+      "size_bytes": 4829431,
+      "params": null,
+      "quantization": null,
+      "compute_units": "all",
+      "latency_ms": {
+        "p50": 0.4335641860961914,
+        "p95": 0.5290508270263672,
+        "mean": 0.4700601100921631,
+        "n_iters": 120,
+        "warmup_iters": null,
+        "input_shape": null
+      },
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": {
+        "ane_fraction": 1.0,
+        "gpu_fraction": 0.0,
+        "cpu_fraction": 0.0,
+        "fallback_ops": [],
+        "source": "xcode_performance_report",
+        "num_compute_operations": 101,
+        "fractions_source": "coremltools_compute_plan"
+      },
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:19:33Z",
+      "script": "ch11_3_apple.py",
+      "notes": "ingested from Xcode 16 .mlperf bundle; per-iteration latency is the report's own predict.samples. ANE/GPU/CPU per-op fractions not exposed in JSON \u2014 only numOperations recorded."
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_palettize_4bit",
+      "backend": "coreml",
+      "device": {
+        "name": "iPhone 16",
+        "soc": "iPhone 16",
+        "os": "iOS 26.3.1",
+        "class": "phone"
+      },
+      "modality": "vision",
+      "size_bytes": 2459828,
+      "params": null,
+      "quantization": null,
+      "compute_units": "all",
+      "latency_ms": {
+        "p50": 0.4194974899291992,
+        "p95": 0.5085170269012451,
+        "mean": 0.45483211676279706,
+        "n_iters": 120,
+        "warmup_iters": null,
+        "input_shape": null
+      },
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": {
+        "ane_fraction": 1.0,
+        "gpu_fraction": 0.0,
+        "cpu_fraction": 0.0,
+        "fallback_ops": [],
+        "source": "xcode_performance_report",
+        "num_compute_operations": 101,
+        "fractions_source": "coremltools_compute_plan"
+      },
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:19:34Z",
+      "script": "ch11_3_apple.py",
+      "notes": "ingested from Xcode 16 .mlperf bundle; per-iteration latency is the report's own predict.samples. ANE/GPU/CPU per-op fractions not exposed in JSON \u2014 only numOperations recorded."
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_palettize_6bit",
+      "backend": "coreml",
+      "device": {
+        "name": "iPhone 16",
+        "soc": "iPhone 16",
+        "os": "iOS 26.3.1",
+        "class": "phone"
+      },
+      "modality": "vision",
+      "size_bytes": 3613887,
+      "params": null,
+      "quantization": null,
+      "compute_units": "all",
+      "latency_ms": {
+        "p50": 0.4290342330932617,
+        "p95": 0.5293369293212891,
+        "mean": 0.46012600262959796,
+        "n_iters": 120,
+        "warmup_iters": null,
+        "input_shape": null
+      },
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": {
+        "ane_fraction": 1.0,
+        "gpu_fraction": 0.0,
+        "cpu_fraction": 0.0,
+        "fallback_ops": [],
+        "source": "xcode_performance_report",
+        "num_compute_operations": 101,
+        "fractions_source": "coremltools_compute_plan"
+      },
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:19:35Z",
+      "script": "ch11_3_apple.py",
+      "notes": "ingested from Xcode 16 .mlperf bundle; per-iteration latency is the report's own predict.samples. ANE/GPU/CPU per-op fractions not exposed in JSON \u2014 only numOperations recorded."
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_fp16",
+      "backend": "coreml",
+      "device": {
+        "name": "iPhone 16",
+        "soc": "iPhone 16",
+        "os": "iOS 26.3.1",
+        "class": "phone"
+      },
+      "modality": "audio",
+      "size_bytes": 16462375,
+      "params": null,
+      "quantization": null,
+      "compute_units": "all",
+      "latency_ms": {
+        "p50": 18.44000816345215,
+        "p95": 19.398921728134155,
+        "mean": 18.675926327705383,
+        "n_iters": 120,
+        "warmup_iters": null,
+        "input_shape": null
+      },
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": {
+        "ane_fraction": 1.0,
+        "gpu_fraction": 0.0,
+        "cpu_fraction": 0.0,
+        "fallback_ops": [],
+        "source": "xcode_performance_report",
+        "num_compute_operations": 101,
+        "fractions_source": "coremltools_compute_plan"
+      },
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:22:57Z",
+      "script": "ch11_3_apple.py",
+      "notes": "ingested from Xcode 16 .mlperf bundle; per-iteration latency is the report's own predict.samples. ANE/GPU/CPU per-op fractions not exposed in JSON \u2014 only numOperations recorded."
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_int8_weight_only",
+      "backend": "coreml",
+      "device": {
+        "name": "iPhone 16",
+        "soc": "iPhone 16",
+        "os": "iOS 26.3.1",
+        "class": "phone"
+      },
+      "modality": "audio",
+      "size_bytes": 8331566,
+      "params": null,
+      "quantization": null,
+      "compute_units": "all",
+      "latency_ms": {
+        "p50": 18.706977367401123,
+        "p95": 23.33695292472839,
+        "mean": 19.742147127787273,
+        "n_iters": 120,
+        "warmup_iters": null,
+        "input_shape": null
+      },
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": {
+        "ane_fraction": 1.0,
+        "gpu_fraction": 0.0,
+        "cpu_fraction": 0.0,
+        "fallback_ops": [],
+        "source": "xcode_performance_report",
+        "num_compute_operations": 101,
+        "fractions_source": "coremltools_compute_plan"
+      },
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:23:01Z",
+      "script": "ch11_3_apple.py",
+      "notes": "ingested from Xcode 16 .mlperf bundle; per-iteration latency is the report's own predict.samples. ANE/GPU/CPU per-op fractions not exposed in JSON \u2014 only numOperations recorded."
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_fp16",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndNeuralEngine_power_30s",
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": {
+        "mean": 5933.566666666667,
+        "peak": 9147.0,
+        "source": "powermetrics",
+        "window_s": 30
+      },
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T06:25:23Z",
+      "script": "ch11_3_apple.py",
+      "notes": "30s window; 69077 iters"
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_int8_linear",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndNeuralEngine_power_30s",
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": {
+        "mean": 4608.4,
+        "peak": 8610.0,
+        "source": "powermetrics",
+        "window_s": 30
+      },
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T06:25:55Z",
+      "script": "ch11_3_apple.py",
+      "notes": "30s window; 58513 iters"
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_int8_weight_only",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndNeuralEngine_power_30s",
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": {
+        "mean": 4429.766666666666,
+        "peak": 7391.0,
+        "source": "powermetrics",
+        "window_s": 30
+      },
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T06:26:26Z",
+      "script": "ch11_3_apple.py",
+      "notes": "30s window; 56662 iters"
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "coreml_palettize_6bit",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndNeuralEngine_power_30s",
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": {
+        "mean": 6544.5,
+        "peak": 7682.0,
+        "source": "powermetrics",
+        "window_s": 30
+      },
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T06:27:28Z",
+      "script": "ch11_3_apple.py",
+      "notes": "30s window; 79183 iters"
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_fp16",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "audio",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndNeuralEngine_power_30s",
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": {
+        "mean": 5710.3,
+        "peak": 7461.0,
+        "source": "powermetrics",
+        "window_s": 30
+      },
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T06:27:59Z",
+      "script": "ch11_3_apple.py",
+      "notes": "30s window; 2037 iters"
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_int8_weight_only",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "audio",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndNeuralEngine_power_30s",
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": {
+        "mean": 6686.8,
+        "peak": 10917.0,
+        "source": "powermetrics",
+        "window_s": 30
+      },
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T06:28:31Z",
+      "script": "ch11_3_apple.py",
+      "notes": "30s window; 2036 iters"
+    },
+    {
+      "model": "llama_3_2_1b_instruct",
+      "variant": "coreml_prefill128_int4_per_block",
+      "backend": "coreml",
+      "device": {
+        "name": "iPhone 16",
+        "soc": "iPhone 16",
+        "os": "iOS 26.3.1",
+        "class": "phone"
+      },
+      "modality": "text",
+      "size_bytes": 696013521,
+      "params": null,
+      "quantization": null,
+      "compute_units": "all",
+      "latency_ms": {
+        "p50": 714.226484298706,
+        "p95": 1797.4115312099457,
+        "mean": 854.1421890258789,
+        "n_iters": 16,
+        "warmup_iters": null,
+        "input_shape": null
+      },
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": {
+        "ane_fraction": 0.0,
+        "gpu_fraction": 1.0,
+        "cpu_fraction": 0.0,
+        "fallback_ops": [
+          "ios16.reduce_mean",
+          "ios18.add",
+          "ios18.cast",
+          "ios18.concat",
+          "ios18.equal",
+          "ios18.expand_dims",
+          "ios18.gather",
+          "ios18.gather_nd",
+          "ios18.greater_equal",
+          "ios18.linear",
+          "ios18.logical_and",
+          "ios18.matmul",
+          "ios18.mul",
+          "ios18.pow",
+          "ios18.reshape",
+          "ios18.rsqrt",
+          "ios18.silu",
+          "ios18.slice_by_index",
+          "ios18.softmax",
+          "ios18.transpose"
+        ],
+        "source": "xcode_performance_report",
+        "num_compute_operations": 1127,
+        "fractions_source": "coremltools_compute_plan"
+      },
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:20:33Z",
+      "script": "ch11_3_apple.py",
+      "notes": "ingested from Xcode 16 .mlperf bundle; per-iteration latency is the report's own predict.samples. ANE/GPU/CPU per-op fractions not exposed in JSON \u2014 only numOperations recorded."
+    },
+    {
+      "model": "llama_3_2_1b_instruct",
+      "variant": "coreml_prefill128_int8_per_block",
+      "backend": "coreml",
+      "device": {
+        "name": "iPhone 16",
+        "soc": "iPhone 16",
+        "os": "iOS 26.3.1",
+        "class": "phone"
+      },
+      "modality": "text",
+      "size_bytes": 1313887000,
+      "params": null,
+      "quantization": null,
+      "compute_units": "all",
+      "latency_ms": {
+        "p50": 1040.685534477234,
+        "p95": 1612.5400364398956,
+        "mean": 1171.038995186488,
+        "n_iters": 12,
+        "warmup_iters": null,
+        "input_shape": null
+      },
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": {
+        "ane_fraction": 0.0,
+        "gpu_fraction": 1.0,
+        "cpu_fraction": 0.0,
+        "fallback_ops": [
+          "ios16.reduce_mean",
+          "ios18.add",
+          "ios18.cast",
+          "ios18.concat",
+          "ios18.equal",
+          "ios18.expand_dims",
+          "ios18.gather",
+          "ios18.gather_nd",
+          "ios18.greater_equal",
+          "ios18.linear",
+          "ios18.logical_and",
+          "ios18.matmul",
+          "ios18.mul",
+          "ios18.pow",
+          "ios18.reshape",
+          "ios18.rsqrt",
+          "ios18.silu",
+          "ios18.slice_by_index",
+          "ios18.softmax",
+          "ios18.transpose"
+        ],
+        "source": "xcode_performance_report",
+        "num_compute_operations": 1127,
+        "fractions_source": "coremltools_compute_plan"
+      },
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:21:19Z",
+      "script": "ch11_3_apple.py",
+      "notes": "ingested from Xcode 16 .mlperf bundle; per-iteration latency is the report's own predict.samples. ANE/GPU/CPU per-op fractions not exposed in JSON \u2014 only numOperations recorded."
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_fp16",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "audio",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": null,
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": {
+        "metric": "wer",
+        "value": 0.08438818565400844,
+        "secondary": {
+          "delta_wer_vs_fp16": 0.0
+        },
+        "dataset": "librispeech_test_clean_subset",
+        "n_samples": 100
+      },
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T09:12:24Z",
+      "script": "ch11_3_apple.py",
+      "notes": "FP16 baseline WER on the LibriSpeech subset; \u0394WER framing per spec."
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_int8_weight_only",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "audio",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": null,
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": {
+        "metric": "wer",
+        "value": 0.08438818565400844,
+        "secondary": {
+          "delta_wer_vs_fp16": 0.0
+        },
+        "dataset": "librispeech_test_clean_subset",
+        "n_samples": 100
+      },
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T09:12:49Z",
+      "script": "ch11_3_apple.py",
+      "notes": "INT8 dynamic weight-only on Linear layers via torch.ao.quantization; approximates the Core ML int8_weight_only variant for \u0394WER framing. Decoder participates in scoring; encoder-only Core ML conversion would only differ if Core ML's INT8 differs materially from torch's."
+    },
+    {
+      "model": "llama_3_2_1b_instruct",
+      "variant": "coreml_prefill1_int4_per_block",
+      "backend": "coreml",
+      "device": {
+        "name": "iPhone 16",
+        "soc": "iPhone 16",
+        "os": "iOS 26.3.1",
+        "class": "phone"
+      },
+      "modality": "text",
+      "size_bytes": 695895845,
+      "params": null,
+      "quantization": null,
+      "compute_units": "all",
+      "latency_ms": {
+        "p50": 16.960978507995605,
+        "p95": 24.192094802856445,
+        "mean": 69.97724815651223,
+        "n_iters": 81,
+        "warmup_iters": null,
+        "input_shape": null
+      },
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": {
+        "ane_fraction": 0.0,
+        "gpu_fraction": 1.0,
+        "cpu_fraction": 0.0,
+        "fallback_ops": [
+          "ios16.reduce_mean",
+          "ios18.add",
+          "ios18.cast",
+          "ios18.concat",
+          "ios18.equal",
+          "ios18.expand_dims",
+          "ios18.gather",
+          "ios18.gather_nd",
+          "ios18.greater_equal",
+          "ios18.linear",
+          "ios18.logical_and",
+          "ios18.matmul",
+          "ios18.mul",
+          "ios18.pow",
+          "ios18.reshape",
+          "ios18.rsqrt",
+          "ios18.silu",
+          "ios18.slice_by_index",
+          "ios18.softmax",
+          "ios18.transpose"
+        ],
+        "source": "xcode_performance_report",
+        "num_compute_operations": 1095,
+        "fractions_source": "coremltools_compute_plan"
+      },
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:22:02Z",
+      "script": "ch11_3_apple.py",
+      "notes": "ingested from Xcode 16 .mlperf bundle; per-iteration latency is the report's own predict.samples. ANE/GPU/CPU per-op fractions not exposed in JSON \u2014 only numOperations recorded."
+    },
+    {
+      "model": "llama_3_2_1b_instruct",
+      "variant": "coreml_prefill1_int8_per_block",
+      "backend": "coreml",
+      "device": {
+        "name": "iPhone 16",
+        "soc": "iPhone 16",
+        "os": "iOS 26.3.1",
+        "class": "phone"
+      },
+      "modality": "text",
+      "size_bytes": 1313769321,
+      "params": null,
+      "quantization": null,
+      "compute_units": "all",
+      "latency_ms": {
+        "p50": 67.9769515991211,
+        "p95": 233.70122909545898,
+        "mean": 118.9172904468277,
+        "n_iters": 103,
+        "warmup_iters": null,
+        "input_shape": null
+      },
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": {
+        "ane_fraction": 0.0,
+        "gpu_fraction": 1.0,
+        "cpu_fraction": 0.0,
+        "fallback_ops": [
+          "ios16.reduce_mean",
+          "ios18.add",
+          "ios18.cast",
+          "ios18.concat",
+          "ios18.equal",
+          "ios18.expand_dims",
+          "ios18.gather",
+          "ios18.gather_nd",
+          "ios18.greater_equal",
+          "ios18.linear",
+          "ios18.logical_and",
+          "ios18.matmul",
+          "ios18.mul",
+          "ios18.pow",
+          "ios18.reshape",
+          "ios18.rsqrt",
+          "ios18.silu",
+          "ios18.slice_by_index",
+          "ios18.softmax",
+          "ios18.transpose"
+        ],
+        "source": "xcode_performance_report",
+        "num_compute_operations": 1095,
+        "fractions_source": "coremltools_compute_plan"
+      },
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:22:55Z",
+      "script": "ch11_3_apple.py",
+      "notes": "ingested from Xcode 16 .mlperf bundle; per-iteration latency is the report's own predict.samples. ANE/GPU/CPU per-op fractions not exposed in JSON \u2014 only numOperations recorded."
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "dynrange",
+      "backend": "tflite",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": 4997968,
+      "params": null,
+      "quantization": null,
+      "compute_units": null,
+      "latency_ms": {
+        "p50": 5.844583502039313,
+        "p95": 6.534095481038094,
+        "mean": 5.94530040922109,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          224,
+          224,
+          3
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 168.20007925066525,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T10:02:47Z",
+      "script": "ch11_2_tflite.py",
+      "notes": "tensorflow 2.20.0; python arch=arm64; native arm64"
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "int8",
+      "backend": "tflite",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": 5259920,
+      "params": null,
+      "quantization": null,
+      "compute_units": null,
+      "latency_ms": {
+        "p50": 3.565041464753449,
+        "p95": 3.6396496347151697,
+        "mean": 3.5756212275009602,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          224,
+          224,
+          3
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 279.6716811917214,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T10:02:48Z",
+      "script": "ch11_2_tflite.py",
+      "notes": "tensorflow 2.20.0; python arch=arm64; native arm64"
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "int16x8",
+      "backend": "tflite",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": 5526968,
+      "params": null,
+      "quantization": null,
+      "compute_units": null,
+      "latency_ms": {
+        "p50": 86.47858345648274,
+        "p95": 90.47374339425004,
+        "mean": 86.64402601541951,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          224,
+          224,
+          3
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 11.541476614002633,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T10:03:10Z",
+      "script": "ch11_2_tflite.py",
+      "notes": "tensorflow 2.20.0; python arch=arm64; native arm64"
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "fp32",
+      "backend": "tflite",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpu_eval",
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": {
+        "metric": "top1",
+        "value": 0.668,
+        "secondary": {
+          "top5": 0.877
+        },
+        "dataset": "imagenet_val_subset",
+        "n_samples": 1000
+      },
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T10:03:30Z",
+      "script": "ch11_2_tflite.py",
+      "notes": "verify-accuracy on 1000 labelled images."
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "dynrange",
+      "backend": "tflite",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpu_eval",
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": {
+        "metric": "top1",
+        "value": 0.665,
+        "secondary": {
+          "top5": 0.879
+        },
+        "dataset": "imagenet_val_subset",
+        "n_samples": 1000
+      },
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T10:03:40Z",
+      "script": "ch11_2_tflite.py",
+      "notes": "verify-accuracy on 1000 labelled images."
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "int8",
+      "backend": "tflite",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpu_eval",
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": {
+        "metric": "top1",
+        "value": 0.49,
+        "secondary": {
+          "top5": 0.868
+        },
+        "dataset": "imagenet_val_subset",
+        "n_samples": 1000
+      },
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T10:03:47Z",
+      "script": "ch11_2_tflite.py",
+      "notes": "verify-accuracy on 1000 labelled images."
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "int16x8",
+      "backend": "tflite",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "vision",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpu_eval",
+      "latency_ms": null,
+      "throughput": null,
+      "accuracy": {
+        "metric": "top1",
+        "value": 0.506,
+        "secondary": {
+          "top5": 0.874
+        },
+        "dataset": "imagenet_val_subset",
+        "n_samples": 1000
+      },
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-10T10:05:19Z",
+      "script": "ch11_2_tflite.py",
+      "notes": "verify-accuracy on 1000 labelled images."
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "tflite_fp32",
+      "backend": "tflite",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "vision",
+      "size_bytes": 18554400,
+      "params": null,
+      "quantization": null,
+      "compute_units": "xnnpack_1t",
+      "latency_ms": {
+        "p50": 11.842136,
+        "p95": 12.264766,
+        "mean": 11.87851408,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          224,
+          224,
+          3
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 84.18561389624585,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": {
+        "metric": "top1",
+        "value": 0.66,
+        "secondary": {
+          "top5": 0.88
+        },
+        "dataset": "imagenet-1k-val(100)",
+        "n_samples": 100
+      },
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-19T16:51:15Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0"
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "tflite_fp32",
+      "backend": "tflite",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "vision",
+      "size_bytes": 18554400,
+      "params": null,
+      "quantization": null,
+      "compute_units": "xnnpack_4t",
+      "latency_ms": {
+        "p50": 11.829817,
+        "p95": 12.078438,
+        "mean": 11.847665869999998,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          224,
+          224,
+          3
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 84.40481112251355,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": {
+        "metric": "top1",
+        "value": 0.66,
+        "secondary": {
+          "top5": 0.88
+        },
+        "dataset": "imagenet-1k-val(100)",
+        "n_samples": 100
+      },
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-19T16:51:15Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0"
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "tflite_fp32",
+      "backend": "tflite",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "vision",
+      "size_bytes": 18554400,
+      "params": null,
+      "quantization": null,
+      "compute_units": "gpu",
+      "latency_ms": {
+        "p50": 41.883829,
+        "p95": 56.97414,
+        "mean": 43.235020735,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          224,
+          224,
+          3
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 23.129397951010375,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": {
+        "metric": "top1",
+        "value": 0.66,
+        "secondary": {
+          "top5": 0.88
+        },
+        "dataset": "imagenet-1k-val(100)",
+        "n_samples": 100
+      },
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-19T16:51:15Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0"
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "tflite_fp32",
+      "backend": "tflite",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "vision",
+      "size_bytes": 18554400,
+      "params": null,
+      "quantization": null,
+      "compute_units": "nnapi",
+      "latency_ms": {
+        "p50": 11.93737,
+        "p95": 12.045391,
+        "mean": 11.936856795,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          224,
+          224,
+          3
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 83.77414734663405,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": {
+        "metric": "top1",
+        "value": 0.66,
+        "secondary": {
+          "top5": 0.88
+        },
+        "dataset": "imagenet-1k-val(100)",
+        "n_samples": 100
+      },
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-19T16:51:15Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0"
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "tflite_dynrange",
+      "backend": "tflite",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "vision",
+      "size_bytes": 4997968,
+      "params": null,
+      "quantization": null,
+      "compute_units": "xnnpack_1t",
+      "latency_ms": {
+        "p50": 6.405286,
+        "p95": 6.462917,
+        "mean": 6.418572295,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          224,
+          224,
+          3
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 155.79788682585837,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": {
+        "metric": "top1",
+        "value": 0.65,
+        "secondary": {
+          "top5": 0.89
+        },
+        "dataset": "imagenet-1k-val(100)",
+        "n_samples": 100
+      },
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-19T16:51:15Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0"
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "tflite_dynrange",
+      "backend": "tflite",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "vision",
+      "size_bytes": 4997968,
+      "params": null,
+      "quantization": null,
+      "compute_units": "xnnpack_4t",
+      "latency_ms": {
+        "p50": 5.721901,
+        "p95": 5.841719,
+        "mean": 5.75768594,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          224,
+          224,
+          3
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 173.68088680432612,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": {
+        "metric": "top1",
+        "value": 0.65,
+        "secondary": {
+          "top5": 0.89
+        },
+        "dataset": "imagenet-1k-val(100)",
+        "n_samples": 100
+      },
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-19T16:51:15Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0"
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "tflite_dynrange",
+      "backend": "tflite",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "vision",
+      "size_bytes": 4997968,
+      "params": null,
+      "quantization": null,
+      "compute_units": "gpu",
+      "latency_ms": {
+        "p50": 41.175781,
+        "p95": 54.552266,
+        "mean": 41.777076185000006,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          224,
+          224,
+          3
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 23.936572190254147,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": {
+        "metric": "top1",
+        "value": 0.64,
+        "secondary": {
+          "top5": 0.89
+        },
+        "dataset": "imagenet-1k-val(100)",
+        "n_samples": 100
+      },
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-19T16:51:15Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0"
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "tflite_dynrange",
+      "backend": "tflite",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "vision",
+      "size_bytes": 4997968,
+      "params": null,
+      "quantization": null,
+      "compute_units": "nnapi",
+      "latency_ms": {
+        "p50": 6.392708,
+        "p95": 6.55974,
+        "mean": 6.419038805,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          224,
+          224,
+          3
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 155.78656406019346,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": {
+        "metric": "top1",
+        "value": 0.65,
+        "secondary": {
+          "top5": 0.89
+        },
+        "dataset": "imagenet-1k-val(100)",
+        "n_samples": 100
+      },
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-19T16:51:15Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0"
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "tflite_int8",
+      "backend": "tflite",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "vision",
+      "size_bytes": 5259920,
+      "params": null,
+      "quantization": null,
+      "compute_units": "xnnpack_1t",
+      "latency_ms": {
+        "p50": 4.078854,
+        "p95": 4.199245,
+        "mean": 4.081995395,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          224,
+          224,
+          3
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 244.9782283500102,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": {
+        "metric": "top1",
+        "value": 0.49,
+        "secondary": {
+          "top5": 0.89
+        },
+        "dataset": "imagenet-1k-val(100)",
+        "n_samples": 100
+      },
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-19T16:51:15Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0"
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "tflite_int8",
+      "backend": "tflite",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "vision",
+      "size_bytes": 5259920,
+      "params": null,
+      "quantization": null,
+      "compute_units": "xnnpack_4t",
+      "latency_ms": {
+        "p50": 4.095547,
+        "p95": 4.207344,
+        "mean": 4.091367205,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          224,
+          224,
+          3
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 244.41707377864168,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": {
+        "metric": "top1",
+        "value": 0.49,
+        "secondary": {
+          "top5": 0.89
+        },
+        "dataset": "imagenet-1k-val(100)",
+        "n_samples": 100
+      },
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-19T16:51:15Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0"
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "tflite_int8",
+      "backend": "tflite",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "vision",
+      "size_bytes": 5259920,
+      "params": null,
+      "quantization": null,
+      "compute_units": "gpu",
+      "latency_ms": {
+        "p50": 41.410912,
+        "p95": 58.33487,
+        "mean": 41.836263335,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          224,
+          224,
+          3
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 23.90270832728518,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": {
+        "metric": "top1",
+        "value": 0.49,
+        "secondary": {
+          "top5": 0.9
+        },
+        "dataset": "imagenet-1k-val(100)",
+        "n_samples": 100
+      },
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-19T16:51:15Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0"
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "tflite_int16x8",
+      "backend": "tflite",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "vision",
+      "size_bytes": 5526968,
+      "params": null,
+      "quantization": null,
+      "compute_units": "xnnpack_1t",
+      "latency_ms": {
+        "p50": 141.726537,
+        "p95": 142.289766,
+        "mean": 141.70144969,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          224,
+          224,
+          3
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 7.057090821496168,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": {
+        "metric": "top1",
+        "value": 0.47,
+        "secondary": {
+          "top5": 0.89
+        },
+        "dataset": "imagenet-1k-val(100)",
+        "n_samples": 100
+      },
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-19T16:51:15Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0"
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "tflite_int16x8",
+      "backend": "tflite",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "vision",
+      "size_bytes": 5526968,
+      "params": null,
+      "quantization": null,
+      "compute_units": "xnnpack_4t",
+      "latency_ms": {
+        "p50": 142.92888,
+        "p95": 143.376849,
+        "mean": 142.918866415,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          224,
+          224,
+          3
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 6.996976851861214,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": {
+        "metric": "top1",
+        "value": 0.47,
+        "secondary": {
+          "top5": 0.89
+        },
+        "dataset": "imagenet-1k-val(100)",
+        "n_samples": 100
+      },
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-19T16:51:15Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0"
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "tflite_int16x8",
+      "backend": "tflite",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "vision",
+      "size_bytes": 5526968,
+      "params": null,
+      "quantization": null,
+      "compute_units": "gpu",
+      "latency_ms": {
+        "p50": 143.334974,
+        "p95": 143.780781,
+        "mean": 143.36051657,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          224,
+          224,
+          3
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 6.975421293991506,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": {
+        "metric": "top1",
+        "value": 0.47,
+        "secondary": {
+          "top5": 0.89
+        },
+        "dataset": "imagenet-1k-val(100)",
+        "n_samples": 100
+      },
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-19T16:51:15Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0"
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "tflite_int8",
+      "backend": "tflite",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "vision",
+      "size_bytes": 5259920,
+      "params": null,
+      "quantization": null,
+      "compute_units": "xnnpack_4t_sustained_300s",
+      "latency_ms": {
+        "p50": 4.095547,
+        "p95": 4.207344,
+        "mean": 4.091367205,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          224,
+          224,
+          3
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 244.41707377864168,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": {
+        "metric": "top1",
+        "value": 0.49,
+        "secondary": {
+          "top5": 0.89
+        },
+        "dataset": "imagenet-1k-val(100)",
+        "n_samples": 100
+      },
+      "power_mw": null,
+      "sustained": {
+        "window_s": 300,
+        "throughput_first_30s": 240.74782050998093,
+        "throughput_last_30s": 238.36419235894977,
+        "thermal_pressure_observed": false
+      },
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-19T16:51:15Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0"
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "tflite_int8",
+      "backend": "tflite",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "vision",
+      "size_bytes": 5259920,
+      "params": null,
+      "quantization": null,
+      "compute_units": "xnnpack_4t_power_30s",
+      "latency_ms": {
+        "p50": 4.095547,
+        "p95": 4.207344,
+        "mean": 4.091367205,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          224,
+          224,
+          3
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 244.41707377864168,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": {
+        "metric": "top1",
+        "value": 0.49,
+        "secondary": {
+          "top5": 0.89
+        },
+        "dataset": "imagenet-1k-val(100)",
+        "n_samples": 100
+      },
+      "power_mw": {
+        "mean": 2760.956300459999,
+        "peak": 3829.155332,
+        "source": "BatteryManager I*V fallback (\u00b120%)",
+        "window_s": 30
+      },
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-19T16:51:15Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0 [energy_per_inference_mj=11.5798]"
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_int8_linear",
+      "backend": "coreml",
+      "device": {
+        "name": "iPhone 16",
+        "soc": "iPhone 16",
+        "os": "iOS 26.3.1",
+        "class": "phone"
+      },
+      "modality": "audio",
+      "size_bytes": 8317342,
+      "params": null,
+      "quantization": null,
+      "compute_units": "all",
+      "latency_ms": {
+        "p50": 17.92997121810913,
+        "p95": 18.32749843597412,
+        "mean": 18.118174870808918,
+        "n_iters": 120,
+        "warmup_iters": null,
+        "input_shape": null
+      },
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": {
+        "ane_fraction": 1.0,
+        "gpu_fraction": 0.0,
+        "cpu_fraction": 0.0,
+        "fallback_ops": [],
+        "source": "xcode_performance_report",
+        "num_compute_operations": 101,
+        "fractions_source": "coremltools_compute_plan"
+      },
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:22:59Z",
+      "script": "ch11_3_apple.py",
+      "notes": "ingested from Xcode 16 .mlperf bundle; per-iteration latency is the report's own predict.samples. ANE/GPU/CPU per-op fractions not exposed in JSON \u2014 only numOperations recorded."
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_palettize_4bit",
+      "backend": "coreml",
+      "device": {
+        "name": "iPhone 16",
+        "soc": "iPhone 16",
+        "os": "iOS 26.3.1",
+        "class": "phone"
+      },
+      "modality": "audio",
+      "size_bytes": 4187074,
+      "params": null,
+      "quantization": null,
+      "compute_units": "all",
+      "latency_ms": {
+        "p50": 34.65503454208374,
+        "p95": 48.20070266723633,
+        "mean": 34.11448200543722,
+        "n_iters": 120,
+        "warmup_iters": null,
+        "input_shape": null
+      },
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": {
+        "ane_fraction": 1.0,
+        "gpu_fraction": 0.0,
+        "cpu_fraction": 0.0,
+        "fallback_ops": [],
+        "source": "xcode_performance_report",
+        "num_compute_operations": 101,
+        "fractions_source": "coremltools_compute_plan"
+      },
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:23:03Z",
+      "script": "ch11_3_apple.py",
+      "notes": "ingested from Xcode 16 .mlperf bundle; per-iteration latency is the report's own predict.samples. ANE/GPU/CPU per-op fractions not exposed in JSON \u2014 only numOperations recorded."
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_palettize_6bit",
+      "backend": "coreml",
+      "device": {
+        "name": "iPhone 16",
+        "soc": "iPhone 16",
+        "os": "iOS 26.3.1",
+        "class": "phone"
+      },
+      "modality": "audio",
+      "size_bytes": 6235927,
+      "params": null,
+      "quantization": null,
+      "compute_units": "all",
+      "latency_ms": {
+        "p50": 33.352017402648926,
+        "p95": 46.793413162231445,
+        "mean": 33.2726260026296,
+        "n_iters": 120,
+        "warmup_iters": null,
+        "input_shape": null
+      },
+      "throughput": null,
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": {
+        "ane_fraction": 1.0,
+        "gpu_fraction": 0.0,
+        "cpu_fraction": 0.0,
+        "fallback_ops": [],
+        "source": "xcode_performance_report",
+        "num_compute_operations": 101,
+        "fractions_source": "coremltools_compute_plan"
+      },
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:23:05Z",
+      "script": "ch11_3_apple.py",
+      "notes": "ingested from Xcode 16 .mlperf bundle; per-iteration latency is the report's own predict.samples. ANE/GPU/CPU per-op fractions not exposed in JSON \u2014 only numOperations recorded."
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_int8_linear",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "audio",
+      "size_bytes": 8317342,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuOnly",
+      "latency_ms": {
+        "p50": 36.08722903300077,
+        "p95": 39.93532707099803,
+        "mean": 36.802870252286084,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          80,
+          3000
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 27.171793752632187,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:29:48Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_int8_linear",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "audio",
+      "size_bytes": 8317342,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndGPU",
+      "latency_ms": {
+        "p50": 24.465083493851125,
+        "p95": 25.720906333299354,
+        "mean": 24.58818420302123,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          80,
+          3000
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 40.66994096608105,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:29:55Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_int8_linear",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "audio",
+      "size_bytes": 8317342,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndNeuralEngine",
+      "latency_ms": {
+        "p50": 14.503353973850608,
+        "p95": 15.285730961477384,
+        "mean": 14.599524491350166,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          80,
+          3000
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 68.49538151687568,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:30:00Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_int8_linear",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "audio",
+      "size_bytes": 8317342,
+      "params": null,
+      "quantization": null,
+      "compute_units": "all",
+      "latency_ms": {
+        "p50": 14.481208461802453,
+        "p95": 15.36394971772097,
+        "mean": 14.5523795747431,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          80,
+          3000
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 68.71728399220603,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:30:04Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_palettize_4bit",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "audio",
+      "size_bytes": 4187074,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuOnly",
+      "latency_ms": {
+        "p50": 40.328583505470306,
+        "p95": 42.83390152268112,
+        "mean": 40.60675958287902,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          80,
+          3000
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 24.626441761721583,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:30:40Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_palettize_4bit",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "audio",
+      "size_bytes": 4187074,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndGPU",
+      "latency_ms": {
+        "p50": 20.365478994790465,
+        "p95": 21.238575101597235,
+        "mean": 20.37739022343885,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          80,
+          3000
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 49.07399765303419,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:30:46Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_palettize_4bit",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "audio",
+      "size_bytes": 4187074,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndNeuralEngine",
+      "latency_ms": {
+        "p50": 14.649561955593526,
+        "p95": 15.751696174265817,
+        "mean": 14.743717508972622,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          80,
+          3000
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 67.82549919254946,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:30:50Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_palettize_4bit",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "audio",
+      "size_bytes": 4187074,
+      "params": null,
+      "quantization": null,
+      "compute_units": "all",
+      "latency_ms": {
+        "p50": 14.519124990329146,
+        "p95": 15.24995389045216,
+        "mean": 14.624189377063885,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          80,
+          3000
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 68.37985848079677,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:30:55Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_palettize_6bit",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "audio",
+      "size_bytes": 6235927,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuOnly",
+      "latency_ms": {
+        "p50": 41.44435399211943,
+        "p95": 43.95711423130706,
+        "mean": 41.34815939178225,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          80,
+          3000
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 24.18487339484198,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:31:05Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_palettize_6bit",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "audio",
+      "size_bytes": 6235927,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndGPU",
+      "latency_ms": {
+        "p50": 19.004041561856866,
+        "p95": 19.203765277052298,
+        "mean": 19.029403557651676,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          80,
+          3000
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 52.550254503268576,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:31:11Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_palettize_6bit",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "audio",
+      "size_bytes": 6235927,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpuAndNeuralEngine",
+      "latency_ms": {
+        "p50": 13.481250032782555,
+        "p95": 13.748489652061835,
+        "mean": 13.511070032254793,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          80,
+          3000
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 74.013382923241,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:31:15Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "coreml_palettize_6bit",
+      "backend": "coreml",
+      "device": {
+        "name": "MacBook Air M3",
+        "soc": "Apple M3",
+        "os": "macOS 15.2",
+        "class": "laptop"
+      },
+      "modality": "audio",
+      "size_bytes": 6235927,
+      "params": null,
+      "quantization": null,
+      "compute_units": "all",
+      "latency_ms": {
+        "p50": 13.472479011397809,
+        "p95": 13.74586455640383,
+        "mean": 13.501664089853875,
+        "n_iters": 200,
+        "warmup_iters": 50,
+        "input_shape": [
+          1,
+          80,
+          3000
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 74.06494439092675,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-12T16:31:19Z",
+      "script": "ch11_3_apple.py",
+      "notes": ""
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "tflite_dynrange",
+      "backend": "tflite",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "audio",
+      "size_bytes": 10276032,
+      "params": null,
+      "quantization": null,
+      "compute_units": "xnnpack_4t",
+      "latency_ms": {
+        "p50": 290.023334,
+        "p95": 292.718647,
+        "mean": 289.560289275,
+        "n_iters": 200,
+        "warmup_iters": 20,
+        "input_shape": [
+          1,
+          80,
+          3000
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 3.45351222884808,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-19T16:51:15Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0"
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "tflite_dynrange",
+      "backend": "tflite",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "audio",
+      "size_bytes": 10276032,
+      "params": null,
+      "quantization": null,
+      "compute_units": "nnapi",
+      "latency_ms": {
+        "p50": 290.659271,
+        "p95": 292.952917,
+        "mean": 290.52022125999997,
+        "n_iters": 200,
+        "warmup_iters": 20,
+        "input_shape": [
+          1,
+          80,
+          3000
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 3.442101192347137,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-19T16:51:15Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0"
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "tflite_dynrange",
+      "backend": "tflite",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "audio",
+      "size_bytes": 10276032,
+      "params": null,
+      "quantization": null,
+      "compute_units": "gpu",
+      "latency_ms": {
+        "p50": 368.603724,
+        "p95": 391.625886,
+        "mean": 368.62761158999996,
+        "n_iters": 200,
+        "warmup_iters": 20,
+        "input_shape": [
+          1,
+          80,
+          3000
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 2.712764775505297,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-19T16:51:15Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0"
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "tflite_fp32",
+      "backend": "tflite",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "audio",
+      "size_bytes": 32937552,
+      "params": null,
+      "quantization": null,
+      "compute_units": "xnnpack_4t",
+      "latency_ms": {
+        "p50": 510.298308,
+        "p95": 512.70349,
+        "mean": 509.96631332,
+        "n_iters": 200,
+        "warmup_iters": 20,
+        "input_shape": [
+          1,
+          80,
+          3000
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 1.9609138366214154,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-19T16:51:15Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0"
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "tflite_fp32",
+      "backend": "tflite",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "audio",
+      "size_bytes": 32937552,
+      "params": null,
+      "quantization": null,
+      "compute_units": "nnapi",
+      "latency_ms": {
+        "p50": 511.161198,
+        "p95": 513.403829,
+        "mean": 511.046474085,
+        "n_iters": 200,
+        "warmup_iters": 20,
+        "input_shape": [
+          1,
+          80,
+          3000
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 1.9567691994949066,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-19T16:51:15Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0"
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "tflite_fp32",
+      "backend": "tflite",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "audio",
+      "size_bytes": 32937552,
+      "params": null,
+      "quantization": null,
+      "compute_units": "gpu",
+      "latency_ms": {
+        "p50": 552.762162,
+        "p95": 581.982891,
+        "mean": 551.1870156849999,
+        "n_iters": 200,
+        "warmup_iters": 20,
+        "input_shape": [
+          1,
+          80,
+          3000
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 1.8142662500081352,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-19T16:51:15Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0"
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "tflite_dynrange",
+      "backend": "tflite",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "audio",
+      "size_bytes": 10276032,
+      "params": null,
+      "quantization": null,
+      "compute_units": "nnapi_sustained_300s",
+      "latency_ms": {
+        "p50": 290.659271,
+        "p95": 292.952917,
+        "mean": 290.52022125999997,
+        "n_iters": 200,
+        "warmup_iters": 20,
+        "input_shape": [
+          1,
+          80,
+          3000
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 3.442101192347137,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": {
+        "window_s": 300,
+        "throughput_first_30s": 3.457257710306136,
+        "throughput_last_30s": 3.4139663595333936,
+        "thermal_pressure_observed": false
+      },
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-19T16:51:15Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0"
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "tflite_dynrange",
+      "backend": "tflite",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "audio",
+      "size_bytes": 10276032,
+      "params": null,
+      "quantization": null,
+      "compute_units": "nnapi_power_30s",
+      "latency_ms": {
+        "p50": 290.659271,
+        "p95": 292.952917,
+        "mean": 290.52022125999997,
+        "n_iters": 200,
+        "warmup_iters": 20,
+        "input_shape": [
+          1,
+          80,
+          3000
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 3.442101192347137,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": {
+        "mean": 3329.9314781655635,
+        "peak": 4645.640625,
+        "source": "BatteryManager I*V fallback (\u00b120%)",
+        "window_s": 30
+      },
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": null,
+      "timestamp": "2026-05-19T16:51:15Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0 [energy_per_inference_mj=974.3751]"
+    },
+    {
+      "model": "llama_3_2_1b_instruct",
+      "variant": "litertlm_int8",
+      "backend": "litertlm",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "text",
+      "size_bytes": 1251577816,
+      "params": null,
+      "quantization": null,
+      "compute_units": "gpu",
+      "latency_ms": {
+        "p50": 3676.733128,
+        "p95": 3755.139743,
+        "mean": 3700.966305,
+        "n_iters": 3,
+        "warmup_iters": 1,
+        "input_shape": [
+          1,
+          32
+        ],
+        "ttft_ms": 427.954184,
+        "tpot_ms": 41.96169385897436
+      },
+      "throughput": {
+        "samples_per_sec": null,
+        "tokens_per_sec": 23.83580870313916,
+        "prompt_length": 32,
+        "generation_length": 64
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": {
+        "working_set": 33.832244873046875
+      },
+      "prepost": null,
+      "timestamp": "2026-05-19T16:51:15Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0"
+    },
+    {
+      "model": "llama_3_2_1b_instruct",
+      "variant": "litertlm_int8",
+      "backend": "litertlm",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "text",
+      "size_bytes": 1251577816,
+      "params": null,
+      "quantization": null,
+      "compute_units": "gpu",
+      "latency_ms": {
+        "p50": 8336.486439,
+        "p95": 8364.501257,
+        "mean": 8343.217602333334,
+        "n_iters": 3,
+        "warmup_iters": 1,
+        "input_shape": [
+          1,
+          256
+        ],
+        "ttft_ms": 840.4612076666666,
+        "tpot_ms": 40.12169195008912
+      },
+      "throughput": {
+        "samples_per_sec": null,
+        "tokens_per_sec": 24.924193876088143,
+        "prompt_length": 256,
+        "generation_length": 64
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": {
+        "working_set": 33.54261779785156
+      },
+      "prepost": null,
+      "timestamp": "2026-05-19T16:51:15Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0"
+    },
+    {
+      "model": "llama_3_2_1b_instruct",
+      "variant": "litertlm_int8",
+      "backend": "litertlm",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "text",
+      "size_bytes": 1251577816,
+      "params": null,
+      "quantization": null,
+      "compute_units": "gpu",
+      "latency_ms": {
+        "p50": 4347.619665,
+        "p95": 4351.699717,
+        "mean": 4337.320012333334,
+        "n_iters": 3,
+        "warmup_iters": 1,
+        "input_shape": [
+          1,
+          1024
+        ],
+        "ttft_ms": 2390.9464256666665,
+        "tpot_ms": 38.927471733333334
+      },
+      "throughput": {
+        "samples_per_sec": null,
+        "tokens_per_sec": 25.689091093108377,
+        "prompt_length": 1024,
+        "generation_length": 64
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": {
+        "working_set": 33.596649169921875
+      },
+      "prepost": null,
+      "timestamp": "2026-05-19T16:51:15Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0"
+    },
+    {
+      "model": "llama_3_2_1b_instruct",
+      "variant": "litertlm_int8",
+      "backend": "litertlm",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "text",
+      "size_bytes": 1251577816,
+      "params": null,
+      "quantization": null,
+      "compute_units": "gpu_sustained_300s",
+      "latency_ms": {
+        "p50": 3676.733128,
+        "p95": 3755.139743,
+        "mean": 3700.966305,
+        "n_iters": 3,
+        "warmup_iters": 1,
+        "input_shape": [
+          1,
+          32
+        ],
+        "ttft_ms": 427.954184,
+        "tpot_ms": 41.96169385897436
+      },
+      "throughput": {
+        "samples_per_sec": null,
+        "tokens_per_sec": 23.83580870313916,
+        "prompt_length": 32,
+        "generation_length": 64
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": {
+        "window_s": 300,
+        "throughput_first_30s": 23.896868146435658,
+        "throughput_last_30s": 23.660095414697714,
+        "thermal_pressure_observed": false
+      },
+      "ane_op_coverage": null,
+      "memory_mb": {
+        "working_set": 33.832244873046875
+      },
+      "prepost": null,
+      "timestamp": "2026-05-19T16:51:15Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0"
+    },
+    {
+      "model": "llama_3_2_1b_instruct",
+      "variant": "litertlm_int8",
+      "backend": "litertlm",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "text",
+      "size_bytes": 1251577816,
+      "params": null,
+      "quantization": null,
+      "compute_units": "gpu_power_30s",
+      "latency_ms": {
+        "p50": 3676.733128,
+        "p95": 3755.139743,
+        "mean": 3700.966305,
+        "n_iters": 3,
+        "warmup_iters": 1,
+        "input_shape": [
+          1,
+          32
+        ],
+        "ttft_ms": 427.954184,
+        "tpot_ms": 41.96169385897436
+      },
+      "throughput": {
+        "samples_per_sec": null,
+        "tokens_per_sec": 23.83580870313916,
+        "prompt_length": 32,
+        "generation_length": 64
+      },
+      "accuracy": null,
+      "power_mw": {
+        "mean": 5513.360906148388,
+        "peak": 7245.930972,
+        "source": "BatteryManager I*V fallback (\u00b120%)",
+        "window_s": 30
+      },
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": {
+        "working_set": 33.832244873046875
+      },
+      "prepost": null,
+      "timestamp": "2026-05-19T16:51:15Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0 [energy_per_inference_mj=268.7123]"
+    },
+    {
+      "model": "efficientnet_lite0",
+      "variant": "android_decode_bitmapfactory_resize_canvas_normalize_loop",
+      "backend": "prepost",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "vision",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpu",
+      "latency_ms": {
+        "p50": 5.254427,
+        "p95": 5.332031,
+        "mean": 5.257579719999998,
+        "n_iters": 50,
+        "warmup_iters": 10,
+        "input_shape": [
+          1,
+          224,
+          224,
+          3
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 190.20158575931214,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": {
+        "decode_ms": 0.3919395999999999,
+        "resize_ms": 0.14752388,
+        "normalize_ms": 4.718116239999998,
+        "tokenize_ms": null,
+        "detokenize_ms": null,
+        "logmel_ms": null,
+        "nms_ms": null
+      },
+      "timestamp": "2026-05-19T19:02:11Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0"
+    },
+    {
+      "model": "whisper_tiny",
+      "variant": "android_logmel_kotlin_stft",
+      "backend": "prepost",
+      "device": {
+        "name": "Google Pixel 10 Pro",
+        "soc": "Tensor G5",
+        "os": "Android 16 (API 36)",
+        "class": "phone"
+      },
+      "modality": "audio",
+      "size_bytes": null,
+      "params": null,
+      "quantization": null,
+      "compute_units": "cpu",
+      "latency_ms": {
+        "p50": 238.967709,
+        "p95": 261.778489,
+        "mean": 243.01021732,
+        "n_iters": 50,
+        "warmup_iters": 10,
+        "input_shape": [
+          1,
+          80,
+          3000
+        ]
+      },
+      "throughput": {
+        "samples_per_sec": 4.1150533135122584,
+        "tokens_per_sec": null,
+        "prompt_length": null,
+        "generation_length": null
+      },
+      "accuracy": null,
+      "power_mw": null,
+      "sustained": null,
+      "ane_op_coverage": null,
+      "memory_mb": null,
+      "prepost": {
+        "decode_ms": null,
+        "resize_ms": null,
+        "normalize_ms": null,
+        "tokenize_ms": null,
+        "detokenize_ms": null,
+        "logmel_ms": 243.01021732,
+        "nms_ms": null
+      },
+      "timestamp": "2026-05-19T19:02:11Z",
+      "script": "ch11_4_android.py",
+      "notes": "AWS Device Farm Test Run; APK ch11-bench v1.0"
+    }
+  ]
+}
