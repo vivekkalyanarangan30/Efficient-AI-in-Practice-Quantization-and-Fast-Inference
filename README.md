@@ -18,6 +18,7 @@ Code repository for the book *[Efficient AI in Practice: Quantization and Fast I
 | 8 | [Sub-8-bit Formats](ch8/) | [8.2 FP8 Formats](ch8/ch8_fp8_formats.py) &bull; [8.3 FP4 Blockscale](ch8/ch8_fp4_blockscale.py) &bull; [8.4 QLoRA NF4](ch8/ch8_qlora_nf4.py) &bull; [8.5 Ternary 1.58-bit](ch8/ch8_ternary.py) &bull; [Pareto Frontier](ch8/ch8_pareto_frontier.py) |
 | 9 | [Deployment Pipelines](ch9/) | [9.2 ORT + Optimum](ch9/ch9_ort_optimum_deployment.py) &bull; [9.3 TensorRT Engines](ch9/ch9_tensorrt_engines.py) &bull; [9.4 OpenVINO](ch9/ch9_openvino_deployment.py) &bull; [9.5 Packaging & Serving](ch9/ch9_packaging_serving.py) |
 | 10 | [CPU-Friendly LLM Serving with llama.cpp / GGUF](ch10/) | [10.1 Cost Curve](ch10/ch10_cost_curve.py) &bull; [10.2 GGUF Format](ch10/ch10_gguf_format.py) &bull; [10.3 HF → GGUF Convert](ch10/ch10_convert.py) &bull; [10.4 Kernel Families](ch10/ch10_kernels.py) &bull; [10.5 Runtime & Throughput](ch10/ch10_runtime.py) |
+| 11 | [Targeting Edge and Mobile Devices](ch11/) ([README](ch11/README.md)) | [11.1 Aggregate](ch11/ch11_1_aggregate.py) &bull; [11.2 TFLite](ch11/ch11_2_tflite.py) &bull; [11.3 Apple (Core ML + MLX)](ch11/ch11_3_apple.py) &bull; [11.3 iPhone Steps](ch11/ch11_3_iphone_steps.md) &bull; [11.4 Android Ingest](ch11/ch11_4_android.py) &bull; [11.4 Figures](ch11/ch11_4_figures.py) &bull; [11.5 Prepost](ch11/ch11_5_prepost.py) |
 
 <br>
 
@@ -53,6 +54,9 @@ Deploying quantized artifacts through ONNX Runtime + Optimum across CPU / CUDA /
 ### Ch 10 — CPU-Friendly LLM Serving with llama.cpp / GGUF
 The cost-per-million-tokens curve for self-hosted inference, the GGUF v3 file format dissected byte by byte, the safetensors → GGUF → quantized-variant pipeline on Llama-2-7B, x86 kernel families (AVX-2 vs AVX-512+VNNI vs AMX) compared against Apple Silicon NEON/Metal, and runtime memory + throughput measurement.
 
+### Ch 11 — Targeting Edge and Mobile Devices
+On-device inference across three reference devices (MacBook Air M3, iPhone 16, Pixel 10 Pro) and three workloads (EfficientNet-Lite0, Whisper-tiny encoder, Llama-3.2-1B-Instruct): TFLite + LiteRT-LM on Android, Core ML + MLX + MPS on Apple silicon, AWS Device Farm orchestration, iPhone Performance Reports via Xcode, and pre/post-processing overhead measurement. See the chapter's own [README](ch11/README.md) for the full execution-tier setup (Mac / Linux container / Android / iPhone), credential surfaces (HF, Kaggle, AWS), and reproducibility caveats.
+
 <br>
 
 ## Prerequisites
@@ -83,9 +87,10 @@ The book uses a variety of models to demonstrate quantization across architectur
 
 | Domain | Models |
 |--------|--------|
-| Vision | ResNet-18, MobileNetV2, ViT-B/16 |
+| Vision | ResNet-18, MobileNetV2, ViT-B/16, EfficientNet-Lite0 |
+| Audio | Whisper-tiny encoder |
 | Language (small) | BERT, TinyLlama |
-| Language (LLM) | OPT-125m / 1.3B / 2.7B / 6.7B, Llama-2-7B, BitNet b1.58 2B4T |
+| Language (LLM) | OPT-125m / 1.3B / 2.7B / 6.7B, Llama-2-7B, Llama-3.2-1B-Instruct, BitNet b1.58 2B4T |
 
 <br>
 
