@@ -1,0 +1,112 @@
+version: 0.1
+
+# AWS Device Farm test spec for ch11-bench (Android Instrumentation).
+#
+# All model files (vision TFLites, Whisper-tiny encoder TFLites, Llama-3.2-1B
+# .task) are bundled DIRECTLY INSIDE the app APK under android/app/src/main/
+# assets/. LLMBenchmark.kt and AudioBenchmark.kt copy them from assets to
+# ctx.filesDir on first access. No EXTERNAL_DATA upload is needed — leave
+# the Create Run wizard's Step 4 "Upload extra data" field BLANK.
+#
+# History: earlier versions of this testspec probed for /sdcard paths
+# expecting AWS's "Upload extra data" wizard field to extract the ZIP to
+# the device. That feature was unreliable on Android 10+ / scoped storage
+# (extracted to a path the app couldn't see, or wasn't extracted at all
+# — see runs 5_llm, 6_llm, 7_llm in aws_test_run/). Embedding the models
+# in the APK assets instead is more robust and bypasses Device Farm
+# delivery quirks entirely.
+#
+# Artifact capture is defensive. Every adb pull in post_test ends with
+# `|| true` so a failed pull never aborts the phase, and the test phase
+# never exits non-zero — AWS Device Farm has historically skipped
+# post_test on non-zero test exits (see the empty Customer Artifacts ZIP
+# from run 5_llm). The downloaded results-android.json is the ground truth.
+#
+# App writes results to internal storage at:
+#   /data/data/com.ch11.bench/files/results-android.json
+# pulled via `adb shell run-as com.ch11.bench cat files/...`. Debug-signed
+# APKs allow `run-as`; release-signed do not.
+
+android_test_host: amazon_linux_2
+
+phases:
+  install:
+    commands:
+      - echo "AWS Device Farm host environment:"
+      - env | grep -E '^DEVICEFARM_' | sort
+      - 'echo "Working dir: $(pwd)"'
+      - 'echo "Files in working dir: $(ls -la)"'
+
+  pre_test:
+    commands:
+      - echo "Pixel device id $DEVICEFARM_DEVICE_UDID"
+      - adb -s $DEVICEFARM_DEVICE_UDID shell "getprop ro.product.model; getprop ro.soc.model; getprop ro.build.version.release"
+      # NOTE: as of 2026-05-19, all model files (vision TFLites, Whisper-tiny
+      # encoder TFLites, Llama-3.2-1B .task) are bundled DIRECTLY INSIDE THE
+      # APK under android/app/src/main/assets/. LLMBenchmark.kt and
+      # AudioBenchmark.kt copy them out to ctx.filesDir on first access.
+      #
+      # AWS Device Farm's "Upload extra data" wizard field is NO LONGER USED
+      # for this project — the feature was unreliable on Android 10+ /
+      # scoped storage. The Step 4 "Upload extra data" field can be left
+      # blank when creating a run. No extradata.zip required.
+
+  test:
+    commands:
+      - echo "Starting the ch11-bench instrumentation test"
+      # Run `am instrument` and capture its full output. NEVER let this phase
+      # exit non-zero on its own — if we do, AWS Device Farm has historically
+      # skipped post_test artifact capture on some runner versions, leaving
+      # the Customer Artifacts ZIP empty (the 5_llm symptom). We still parse
+      # the status codes for human-readable diagnostics, but we trust the
+      # post_test pull to surface the real result.
+      - |
+        adb -s $DEVICEFARM_DEVICE_UDID shell "am instrument -r -w --no-window-animation \
+          $DEVICEFARM_TEST_PACKAGE_NAME/$DEVICEFARM_TEST_PACKAGE_RUNNER 2>&1 || echo 'AM_INSTRUMENT_NONZERO_EXIT'" \
+          | tee $DEVICEFARM_LOG_DIR/instrument.log || true
+      - |-
+        DID_ANY_TESTS_START=$(grep -c "INSTRUMENTATION_STATUS_CODE: 1" $DEVICEFARM_LOG_DIR/instrument.log || echo 0)
+        TESTS_PASSED=$(grep -c "INSTRUMENTATION_STATUS_CODE: 0" $DEVICEFARM_LOG_DIR/instrument.log || echo 0)
+        TESTS_ERRORED=$(grep -c "INSTRUMENTATION_STATUS_CODE: -1" $DEVICEFARM_LOG_DIR/instrument.log || echo 0)
+        TESTS_FAILED=$(grep -c "INSTRUMENTATION_STATUS_CODE: -2" $DEVICEFARM_LOG_DIR/instrument.log || echo 0)
+        echo "Instrumentation result: started=$DID_ANY_TESTS_START passed=$TESTS_PASSED failed=$TESTS_FAILED errored=$TESTS_ERRORED"
+        # Do not `exit 1` here — post_test must always run, regardless of
+        # whether the on-device test passed, failed, or never started. The
+        # downloaded results-android.json is the ground truth.
+
+  post_test:
+    commands:
+      - 'echo "=== post_test: pulling artifacts to $DEVICEFARM_LOG_DIR ==="'
+      - echo "Internal sandbox listing (debug):"
+      # All `run-as` commands tolerate failure — if the app's files dir is
+      # missing or empty, we still continue and pull whatever we can. Every
+      # command ends in `|| true` so a failed pull never aborts the phase.
+      - |
+        adb -s $DEVICEFARM_DEVICE_UDID shell \
+          "run-as com.ch11.bench sh -c 'ls -la files/ 2>/dev/null || echo SANDBOX_LIST_FAILED'" || true
+      - echo "Pulling results-android.json (vision + LLM records):"
+      - |
+        adb -s $DEVICEFARM_DEVICE_UDID shell \
+          "run-as com.ch11.bench cat files/results-android.json 2>/dev/null" \
+          > $DEVICEFARM_LOG_DIR/results-android.json || true
+      - echo "Pulling results-android-error.txt (only present on app crash):"
+      - |
+        adb -s $DEVICEFARM_DEVICE_UDID shell \
+          "run-as com.ch11.bench cat files/results-android-error.txt 2>/dev/null" \
+          > $DEVICEFARM_LOG_DIR/results-android-error.txt || true
+      - echo "Pulling app logcat (last 20 MB) for post-mortem:"
+      - |
+        adb -s $DEVICEFARM_DEVICE_UDID logcat -d -t 200000 \
+          > $DEVICEFARM_LOG_DIR/logcat.txt 2>&1 || true
+      - echo "Captured files in DEVICEFARM_LOG_DIR:"
+      - ls -la $DEVICEFARM_LOG_DIR/ || true
+      - echo "Size summary:"
+      - du -sh $DEVICEFARM_LOG_DIR/* 2>/dev/null || true
+      - echo "Head of results-android.json (first 60 lines):"
+      - head -60 $DEVICEFARM_LOG_DIR/results-android.json || echo "results-android.json missing or empty"
+      - echo "=== post_test done ==="
+
+# Customer artifacts: AWS collects $DEVICEFARM_LOG_DIR by default. Whatever
+# we put there in post_test ends up in the run's Customer Artifacts ZIP.
+artifacts:
+  - $DEVICEFARM_LOG_DIR
