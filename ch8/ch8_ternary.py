@@ -1084,9 +1084,9 @@ def run_realmodel(config: Config):
     storage_data = [
         (f"{config.baseline_model}\n(BF16)",
          base_bytes / (1024**3), COLORS["bf16"], HATCHES["bf16"]),
-        (f"{config.ternary_model}\n(BF16 master wts)",
+        (f"{config.ternary_model}\n(BF16\nmaster wts)",
          tern_bytes / (1024**3), COLORS["ternary_twn"], HATCHES["ternary"]),
-        (f"{config.ternary_model}\n(packed, bitnet.cpp)",
+        (f"{config.ternary_model}\n(packed,\nbitnet.cpp)",
          theoretical_bytes / (1024**3), COLORS["ternary"], ""),
     ]
     x = np.arange(len(storage_data))
