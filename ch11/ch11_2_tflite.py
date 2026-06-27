@@ -85,7 +85,8 @@ HATCHES = ["", "////", "....", "xxxx", "\\\\\\\\", "++++"]
 # Paths.                                                                      #
 # --------------------------------------------------------------------------- #
 HERE = Path(__file__).resolve().parent
-RESULTS_JSON = HERE / "results.json"
+# Data file was renamed results.json -> runs.json (same schema/contents).
+RESULTS_JSON = HERE / "runs.json"
 CAVEATS_MD = HERE / "caveats.md"
 MODELS_DIR = HERE / "models" / "tflite"
 FIG_DIR = HERE / "figures" / "ch11_2"

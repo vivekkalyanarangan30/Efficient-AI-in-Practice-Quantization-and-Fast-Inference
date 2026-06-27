@@ -30,7 +30,8 @@ import numpy as np
 import ch11_3_apple as apple
 
 HERE = Path(__file__).resolve().parent
-RESULTS_JSON = HERE / "results.json"
+# Data file was renamed results.json -> runs.json (same schema/contents).
+RESULTS_JSON = HERE / "runs.json"
 FIG_DIR = HERE / "figures" / "ch11_4"
 LOG_DIR = HERE / "logs"
 

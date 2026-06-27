@@ -79,7 +79,8 @@ PALETTE = ["#319974", "#7E76B0", "#D67430", "#3A6FA8", "#888888", "#444444"]
 HATCHES = ["", "////", "....", "xxxx", "\\\\\\\\", "++++"]
 
 HERE = Path(__file__).resolve().parent
-RESULTS_JSON = HERE / "results.json"
+# Data file was renamed results.json -> runs.json (same schema/contents).
+RESULTS_JSON = HERE / "runs.json"
 CAVEATS_MD = HERE / "caveats.md"
 DATA_DIR = HERE / "data"
 LOG_DIR = HERE / "logs"

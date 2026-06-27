@@ -121,7 +121,8 @@ DEVICE_CLASS_LABELS = {
 }
 
 HERE = Path(__file__).resolve().parent
-RESULTS_JSON = HERE / "results.json"
+# Data file was renamed results.json -> runs.json (same schema/contents).
+RESULTS_JSON = HERE / "runs.json"
 RUN_REPORT = HERE / "run_report.md"
 FIG_DIR = HERE / "figures" / "ch11_1"
 LOG_DIR = HERE / "logs"
