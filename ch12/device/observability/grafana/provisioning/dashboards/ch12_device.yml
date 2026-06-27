@@ -1,0 +1,11 @@
+apiVersion: 1
+providers:
+  - name: ch12-device
+    orgId: 1
+    folder: ''
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 30
+    allowUiUpdates: true
+    options:
+      path: /Users/vivekkalyanarangan/Downloads/ch12/observability/grafana/provisioning/dashboards

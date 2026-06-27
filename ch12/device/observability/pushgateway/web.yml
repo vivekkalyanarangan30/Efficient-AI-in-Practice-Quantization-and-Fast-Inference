@@ -1,0 +1,8 @@
+# Pushgateway web config (TLS + basic auth, loopback only)
+tls_server_config:
+  cert_file: /Users/vivekkalyanarangan/Downloads/ch12/observability/tls/server.crt
+  key_file:  /Users/vivekkalyanarangan/Downloads/ch12/observability/tls/server.key
+  min_version: TLS12
+
+basic_auth_users:
+  'ch12_device': '$2b$12$t9DdEUNk5rbJF2wybkiHRukpXA8.nX5G4XbxeDoCkkLhWWN5pDhAG'
